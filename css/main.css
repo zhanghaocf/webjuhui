@@ -6,7 +6,7 @@
 [v-cloak]{
 	display: none;
 }
-.swiper-container {
+.bannerswiper {
     height: 3rem;
 }
 .slideimg{
@@ -105,6 +105,7 @@
 	color:#3a3a3a;
 	font-weight: bold;
 	text-indent: 0.14rem;
+	margin-bottom: 0.1rem;
 }
 .bname{
 	font-size: 0.23rem;
@@ -112,5 +113,121 @@
 	text-indent: 0.14rem;
 }
 .bbtn{
-	width:
+	width:1.3rem;
+	height:0.45rem;
+	border-radius: 0.08rem;
+	float: right;
+	box-sizing: border-box;
+	text-align: center;
+	line-height: 0.45rem;
+	font-size: 0.16rem;
+	color:#eea651;
+	border:0.01rem solid;
+}
+.recommend{
+	margin-top: 0.32rem;
+	box-sizing: border-box;
+	overflow: hidden;
+}
+.recommendswiper{
+	margin-top:0.26rem;
+	height:0.85rem;
+	line-height: 0.85rem;
+	text-align: center;
+	line-height: 0.85rem;
+	font-size: 0.3rem;
+	color:#777777;
+	border-top:0.01rem solid #f4f5f7;
+	border-bottom:0.01rem solid #f4f5f7;
+
+}
+.activerecommend{
+	color:#e88817;
+}
+.activerecommend:after{
+	content:'';
+	display: block;
+	width:100%;
+	height:0.05rem;
+	background-image: linear-gradient(to right,#eb993c 50%,#fdce2f 50%);
+	background-image: -webkit-linear-gradient(to right,#eb993c 50%,#fdce2f 50%);
+	margin-top:-0.06rem;
+}
+.recommendslide{
+	height:100%;
+	position:relative;
+}
+.reswiper{
+	height: 350px;
+}
+.reslide{
+	box-sizing: border-box;
+	padding:0 0.27rem;
+}
+.wuimg{
+	width:0.9rem;
+	height:0.9rem;
+	border-radius: 0.1rem;
+	object-fit: cover;
+	margin-left: 0.1rem;
+	flex-shrink: 0;
+	margin-right: 0.27rem;
+}
+.wuopera{
+	width:1.6rem;
+	height:0.5rem;
+	line-height: 0.5rem;
+	vertical-align: middle;
+	font-size: 0.28rem;
+	font-weight: bold;
+	color:white;
+	background-color: #ec9d40;
+	text-align: center;
+	border-radius: 0.1rem;
+	flex-shrink: 0;
+}
+.wupin{
+	height:20%;
+	box-sizing: border-box;
+	border-bottom:0.01rem solid #f5f6f8;
+	display: flex;
+	display: -webkit-flex;
+	align-items: center;
+	justify-content: space-between;
+}
+.midwu{
+	flex-grow: 1;
+}
+.wutitle{
+	font-size: 0.3rem;
+	color:black;
+}
+.wudesc{
+	font-size: 0.22rem;
+	color:#ababab;
+}
+.operare{
+	height:0.8rem;
+}
+.news{
+	margin-top: 0.32rem;
+	margin-bottom: 0.5rem;
+}
+.newlist{
+	padding:0 0 0.48rem;
+	margin:0 0.27rem 0.48rem;
+	box-sizing: border-box;
+	border-bottom: 0.01rem solid #f2f4f6;
+}
+.newsimg{
+	object-fit: cover;
+	width:100%;
+	height:2rem;
+}
+.newstitle{
+	font-size: 0.3rem;
+	color:black;
+	font-weight: bold;
+	word-break: break-all;
+	margin-bottom: 0.24rem;
 }
