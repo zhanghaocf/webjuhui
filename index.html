@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>金融频道</title>
+		<link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/main.css"/>
+	</head>
+	<body>
+		<div id="app" v-cloak>
+			<div class="swiper-container borderbottomgray">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide" v-for="item in bannerList" :key="item">
+						<img class="slideimg" :src="item" />
+					</div>
+				</div>
+				<!-- 如果需要分页器 -->
+				<div class="swiper-pagination"></div>
+			</div>
+			<div class="onlineBrand borderbottomgray">
+				<div class="text">在线品牌</div>
+				<div class="onlineswiper">
+					<div class="swiper-wrapper">
+						<div class="swiper-slide onlineslide" v-for="item in onlinelist" :key="item.id">
+							<img class="onlineimg" :src="item.img">
+							<div class="mt13" v-text="item.text"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class='bargain borderbottomgray'>
+				<div class='text'>超值特惠</div>
+				<div class='top1'>
+				  <img class="bargainimg" src='https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg' />
+				  <div class='tag'>No.1</div>
+				</div>
+				<div class='top2'>
+				  <img class="bargainimg" src='https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg' />
+				  <div class='tag'>No.2</div>
+				  <div class="bargaintitle">9折玩转四大主题乐园</div>
+				  <div>
+					  <div class="bbtn">无卡申请</div>
+					  <div class="bname">中国银行信用卡</div>
+				  </div>
+				</div>
+				<div class='top3'>
+				  <img class="bargainimg" src='https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg' />
+				  <div class='tag'>No.3</div>
+				  <div class="bargaintitle">9折玩转四大主题乐园</div>
+				  <div>
+					<div class="bbtn">无卡申请</div>
+				  	<div class="bname">中国银行信用卡</div>
+				  </div>
+				</div>
+			 </div>
+		</div>
+	</body>
+	<script src="js/vue.min.js"></script>
+	<script src="js/swiper.min.js"></script>
+	<script>
+		function setHtmlFoot(){
+			var win=document.documentElement||document.getElementsByTagName("html")[0];
+			var winWidth=win.offsetWidth;
+			var footsize=100*winWidth/750;
+			win.style.fontSize=footsize+"px";
+		}
+		window.onpageshow=function(){
+			setHtmlFoot();
+		}
+		//截流
+		function debounce(fn,time){
+			var timer=null;
+			return function(){
+				clearTimeout(timer);
+				var args=arguments;
+				timer=setTimeout(function(){
+					fn.apply(null,args);
+					
+				},time)
+			}
+		}
+		var setsize=debounce(setHtmlFoot,300);
+		window.onresize=function(){
+			setsize();
+		}
+	</script>
+	<script>
+		//banner图
+		window.onload=function(){
+			var mySwiper = new Swiper ('.swiper-container', {
+			loop: true, // 循环模式选项
+			autoplay: {
+				delay: 6000,
+				stopOnLastSlide: false,
+				disableOnInteraction: false,
+				},
+			// 如果需要分页器
+			pagination: {
+			  el: '.swiper-pagination',
+			}
+		  })     
+		  var onlineSwiper = new Swiper ('.onlineswiper', {
+				slidesPerView : 4,
+				slidesPerGroup : 1,
+			  })     
+		}
+  </script>
+	</script>
+	<script>
+		var vm=new Vue({
+			el:'#app',
+			data:{
+				bannerList: ["https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg",
+				  "https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg"
+				],
+				onlinelist:[
+				  {
+					id:1,
+					img: "https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg",
+					text:'积分兑换'
+				  },
+				  {
+					id: 2,
+					img: "https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg",
+					text: '积分兑换'
+				  },
+				  {
+					id: 3,
+					img: "https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg",
+					text: '积分兑换'
+				  },
+				  {
+					id: 4,
+					img: "https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg",
+					text: '积分兑换'
+				  },
+				  {
+					id: 5,
+					img: "https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg",
+					text: '积分兑换'
+				  }
+				]
+			}
+		})
+	</script>
+</html>
