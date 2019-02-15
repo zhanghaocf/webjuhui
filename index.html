@@ -11,8 +11,10 @@
 		<div id="app" v-cloak>
 			<div class="swiper-container bannerswiper borderbottomgray">
 				<div class="swiper-wrapper">
-					<div class="swiper-slide" v-for="item in bannerList" :key="item">
-						<img class="slideimg" :src="item" />
+					<div class="swiper-slide" v-for="item in bannerList" :key="item.id">
+						<a :href="item.url">
+							<img class="slideimg" :src="item.img" />
+						</a>
 					</div>
 				</div>
 				<!-- 如果需要分页器 -->
@@ -23,60 +25,63 @@
 				<div class="onlineswiper">
 					<div class="swiper-wrapper">
 						<div class="swiper-slide onlineslide" v-for="item in onlinelist" :key="item.id">
+							<img src="src/hot.png" class="hot" v-if="item.ishot" />
 							<img class="onlineimg" :src="item.img">
-							<div class="mt13" v-text="item.text"></div>
+							<div v-text="item.text"></div>
 						</div>
 					</div>
 				</div>
 			</div>
 			<div class='bargain borderbottomgray'>
 				<div class='text'>超值特惠</div>
-				<div v-for="(item , index) in tehui" :class="'top'+(index+1)" :key="item.id">
+				<a v-for="(item , index) in tehui" :class="'top'+(index+1)" :key="item.id" :href="item.url">
 					<img class="bargainimg" :src='item.img' />
-				  	<div class='tag'>No.{{index+1}}</div>
+				  	<div class='tag' v-if="index!=0">No.{{index+1}}</div>
 				  	<div v-if="!!item.title" class="bargaintitle oneline">{{item.title}}</div>
 				  	<div v-if="!!item.name">
 					  	<div class="bbtn">无卡申请</div>
 					  	<div class="bname oneline">{{item.name}}</div>
 				  	</div>
-				</div>
+				</a>
 			 </div>
 			 <div class="recommend borderbottomgray">
 			 	<div class='text'>专属推荐</div>
 			 	<div class="recommendswiper">
 					<div class="swiper-wrapper">
-						<div class="swiper-slide recommendslide" :class="[activerecom===item?'activerecommend':'']" v-for="item in recommendlist" :key="item">
-							{{item}}
+						<div class="swiper-slide recommendslide"  v-for="item in recommendlist" :key="item" @click="selectrecom(item)">
+							<span class="zhushuspan" :class="[activerecom===item?'activerecommend':'']">{{item}}</span>
 						</div>
 					</div>
 				</div>
 				<div class="reswiper swiper-container">
 					<div class="swiper-wrapper">
-						<div class="swiper-slide reslide swiper-no-swiping">
-							<div class="wupin" v-for="(wuitem,wuindex) in recommendObj[activerecom]">
+						<div class="swiper-slide reslide swiper-no-swiping" v-for="(item,keyn) in compu_recommendObj[activerecom]" :key="keyn">
+							<div class="wupin" v-for="(wuitem,wuindex) in item" :key="wuitem.id">
 								<img :src="wuitem.img" class="wuimg" />
 								<div class="midwu">
 									<div class="wutitle oneline">{{wuitem.title}}</div>
 									<div class="wudesc oneline">{{wuitem.desc}}</div>
 								</div>
-								<div class="wuopera">{{wuitem.type}}</div>
+								<a :href="wuitem.url"><div class="wuopera">{{wuitem.type}}</div></a>
 							</div>
-						</div>
-						<div class="swiper-slide reslide swiper-no-swiping">
-							2
 						</div>
 					</div>
 				</div>
 				<div class="operare">
-					
+					<div class="opwrap" @click="oppre">
+						<div class="tri up"></div>
+					</div>
+					<div class="opwrap" @click="opnext">
+						<div class="tri down"></div>
+					</div>
 				</div>
 			 </div>
 			<div class="news">
 				<div class='text'>超值资讯</div>
-				<div class="newlist" v-for="item in newslist" :key="item.id">
+				<a class="newlist" v-for="item in newslist" :key="item.id" :href="item.url">
 					<div class="newstitle">{{item.title}}</div>
 					<img :src="item.img" class="newsimg" />
-				</div>
+				<a>
 			</div>
 		</div>
 	</body>
@@ -110,6 +115,7 @@
 		}
 	</script>
 	<script>
+		var reswiper=null;
 		//banner图
 		window.onload=function(){
 			var mySwiper = new Swiper ('.bannerswiper', {
@@ -132,9 +138,9 @@
 				slidesPerView : 3,
 				slidesPerGroup : 1,
 			  })
-		  var reswiper=new Swiper ('.reswiper', {
-				direction : 'vertical'
-			  })
+		  reswiper=new Swiper ('.reswiper', {
+			direction : 'vertical'
+			})
 		}
   </script>
 	</script>
@@ -142,129 +148,237 @@
 		var vm=new Vue({
 			el:'#app',
 			data:{
-				bannerList: ["https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg",
-				  "https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg"
+				swipercount:1,//专属推荐页面个数
+				bannerList: [
+					{
+						id:1,
+						img:"./src/banner.png",
+						url:'./detail.html?img=./src/detail1.png'
+					},
+					{
+						id:2,
+						img:"./src/banner.png",
+						url:'./detail.html?img=./src/detail2.jpg'
+					}					
 				],
 				onlinelist:[
 				  {
 					id:1,
-					img: "https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg",
-					text:'积分兑换'
+					img: "./src/online1.jpg",
+					text:'饮品随机减',
+					ishot:true
 				  },
 				  {
 					id: 2,
-					img: "https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg",
-					text: '积分兑换'
+					img: "./src/online2.jpg",
+					text: '5元抵扣券',
+					ishot:false
 				  },
 				  {
 					id: 3,
-					img: "https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg",
-					text: '积分兑换'
+					img: "./src/online3.jpg",
+					text: '领半价饭票',
+					ishot:false
 				  },
 				  {
 					id: 4,
-					img: "https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg",
-					text: '积分兑换'
+					img: "./src/online4.jpg",
+					text: '周三享5折',
+					ishot:false
 				  },
 				  {
 					id: 5,
-					img: "https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg",
-					text: '积分兑换'
+					img: "./src/online5.jpg",
+					text: '折扣券放送',
+					ishot:false
 				  }
 				],
 				tehui:[
 					{
 						id:1,
-						img:"https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg",
+						img:"./src/top1.png",
+						url:'./detail.html?img=./src/detail2.jpg'
 					},
 					{
 						id:2, 
-						img:"https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg",
+						img:"./src/top2.png",
 						title:"9折玩转四大主题乐园",
-						name:"中国银行信用卡"
+						name:"中国银行信用卡",
+						url:'./detail.html?img=./src/detail1.png'
 					},
 					{
 						id:3,
-						img:"https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg",
-						title:"9折玩转四大主题乐园",
-						name:"中国银行信用卡"
+						img:"./src/top3.png",
+						title:"天天5折享美食",
+						name:"浦发银行信用卡",
+						url:'./detail.html?img=./src/detail2.jpg'
 					}
 				],
-				recommendlist:['中国邮政','招商银行','浦发银行','中国银行'],
+				recommendlist:['中国银行','招商银行','浦发银行','中信银行'],
 				activerecom:'招商银行',
 				recommendObj:{
-					'中国邮政':[
+					'中国银行':[
 						{
 							id:1,
 							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
 							title:'看电影立减15',
 							desc:'新户首购专享',
-							type:'查看详情'
+							type:'查看详情',
+							url:'./detail.html?img=./src/detail1.png'
 						},
 						{
 							id:2,
 							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
-							type:'立即领取'
+							title:'哈根达斯7元抵扣券',
+							desc:'满35元立减',
+							type:'立即领取',
+							url:'./detail.html?img=./src/detail1.png'
 						},
 						{
 							id:3,
 							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
-							type:'查看详情'
+							title:'星巴克8元抵扣券',
+							desc:'满28元立减',
+							type:'查看详情',
+							url:'./detail.html?img=./src/detail1.png'
 						},
 						{
 							id:4,
 							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
-							type:'立即领取'
+							title:'精选美食周三5折',
+							desc:'招行行用卡专享',
+							type:'立即领取',
+							url:'./detail.html?img=./src/detail1.png'
 						},
 						{
 							id:5,
 							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
+							title:'品牌代金券大放送',
+							desc:'掌上生活APP疯狂领',
+							type:'查看详情',
+							url:'./detail.html?img=./src/detail1.png'
+						},
+						{
+							id:6,
+							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
 							title:'看电影立减15',
 							desc:'新户首购专享',
-							type:'查看详情'
+							type:'查看详情',
+							url:'./detail.html?img=./src/detail1.png'
+						},
+						{
+							id:7,
+							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
+							title:'看电影立减15',
+							desc:'新户首购专享',
+							type:'立即领取',
+							url:'./detail.html?img=./src/detail1.png'
+						},
+						{
+							id:8,
+							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
+							title:'看电影立减15',
+							desc:'新户首购专享',
+							type:'查看详情',
+							url:'./detail.html?img=./src/detail1.png'
+						},
+						{
+							id:9,
+							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
+							title:'看电影立减15',
+							desc:'新户首购专享',
+							type:'立即领取',
+							url:'./detail.html?img=./src/detail1.png'
+						},
+						{
+							id:10,
+							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
+							title:'看电影立减15',
+							desc:'新户首购专享',
+							type:'查看详情',
+							url:'./detail.html?img=./src/detail1.png'
+						},
+						{
+							id:11,
+							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
+							title:'看电影立减15',
+							desc:'新户首购专享',
+							type:'查看详情',
+							url:'./detail.html?img=./src/detail1.png'
+						},
+						{
+							id:12,
+							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
+							title:'看电影立减15',
+							desc:'新户首购专享',
+							type:'立即领取',
+							url:'./detail.html?img=./src/detail1.png'
+						},
+						{
+							id:13,
+							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
+							title:'看电影立减15',
+							desc:'新户首购专享',
+							type:'查看详情',
+							url:'./detail.html?img=./src/detail1.png'
+						},
+						{
+							id:14,
+							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
+							title:'看电影立减15',
+							desc:'新户首购专享',
+							type:'立即领取',
+							url:'./detail.html?img=./src/detail1.png'
+						},
+						{
+							id:15,
+							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
+							title:'看电影立减15',
+							desc:'新户首购专享',
+							type:'查看详情1',
+							url:'./detail.html?img=./src/detail1.png'
 						}
 					],
 					'招商银行':[
 						{
 							id:1,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
+							img:'./src/zhao1.jpg',
 							title:'看电影立减15',
 							desc:'新户首购专享',
-							type:'查看详情'
+							type:'查看详情',
+							url:'./detail.html?img=./src/detail1.png'
 						},
 						{
 							id:2,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
-							type:'立即领取'
+							img:'./src/zhao2.jpg',
+							title:'哈根达斯7元抵扣券',
+							desc:'满35元立减',
+							type:'立即领取',
+							url:'./detail.html?img=./src/detail1.png'
 						},
 						{
 							id:3,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
-							type:'查看详情'
+							img:'./src/zhao3.jpg',
+							title:'星巴克8元抵扣券',
+							desc:'满28元立减',
+							type:'查看详情',
+							url:'./detail.html?img=./src/detail1.png'
 						},
 						{
 							id:4,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
-							type:'立即领取'
+							img:'./src/zhao4.jpg',
+							title:'精选美食周三5折',
+							desc:'招行行用卡专享',
+							type:'立即领取',
+							url:'./detail.html?img=./src/detail1.png'
 						},
 						{
 							id:5,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
-							type:'查看详情'
+							img:'./src/zhao5.jpg',
+							title:'品牌代金券大放送',
+							desc:'掌上生活APP疯狂领',
+							type:'查看详情',
+							url:'./detail.html?img=./src/detail1.png'
 						}
 					],
 					'浦发银行':[
@@ -273,72 +387,82 @@
 							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
 							title:'看电影立减15',
 							desc:'新户首购专享',
-							type:'查看详情'
+							type:'查看详情',
+							url:'./detail.html?img=./src/detail1.png'
 						},
 						{
 							id:2,
 							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
 							title:'看电影立减15',
 							desc:'新户首购专享',
-							type:'立即领取'
+							type:'立即领取',
+							url:'./detail.html?img=./src/detail1.png'
 						},
 						{
 							id:3,
 							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
 							title:'看电影立减15',
 							desc:'新户首购专享',
-							type:'查看详情'
+							type:'查看详情',
+							url:'./detail.html?img=./src/detail1.png'
 						},
 						{
 							id:4,
 							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
 							title:'看电影立减15',
 							desc:'新户首购专享',
-							type:'立即领取'
+							type:'立即领取',
+							url:'./detail.html?img=./src/detail1.png'
 						},
 						{
 							id:5,
 							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
 							title:'看电影立减15',
 							desc:'新户首购专享',
-							type:'查看详情'
+							type:'查看详情',
+							url:'./detail.html?img=./src/detail1.png'
 						}
 					],
-					'中国银行':[
+					'中信银行':[
 						{
 							id:1,
 							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
 							title:'看电影立减15',
 							desc:'新户首购专享',
-							type:'查看详情'
+							type:'查看详情',
+							url:'./detail.html?img=./src/detail1.png'
 						},
 						{
 							id:2,
 							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
 							title:'看电影立减15',
 							desc:'新户首购专享',
-							type:'立即领取'
+							type:'立即领取',
+							url:'./detail.html?img=./src/detail1.png'
 						},
 						{
 							id:3,
 							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
 							title:'看电影立减15',
 							desc:'新户首购专享',
-							type:'查看详情'
+							type:'查看详情',
+							url:'./detail.html?img=./src/detail1.png'
 						},
 						{
 							id:4,
 							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
 							title:'看电影立减15',
 							desc:'新户首购专享',
-							type:'立即领取'
+							type:'立即领取',
+							url:'./detail.html?img=./src/detail1.png'
 						},
 						{
 							id:5,
 							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
 							title:'看电影立减15',
 							desc:'新户首购专享',
-							type:'查看详情'
+							type:'查看详情',
+							url:'./detail.html?img=./src/detail1.png'
 						}
 					]
 				},
@@ -346,14 +470,54 @@
 					{
 						id:1,
 						title:'12306购票低至五折，马上出发！',
-						img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg'
+						img:'./src/news2.png',
+						url:'./detail.html?img=./src/detail2.jpg'
 					},
 					{
 						id:2,
 						title:'推荐亲友办卡，最高可领500元天猫购物券，时间有限，速度扩散吧~',
-						img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg'
+						img:'./src/news1.png',
+						url:'./detail.html?img=./src/detail2.jpg'
 					}
 				]
+			},
+			methods:{
+				opnext:function(){
+					reswiper.updateSlides();
+					reswiper.slideNext();
+				},
+				oppre:function(){
+					reswiper.slidePrev();
+				},
+				selectrecom:function(item){
+					this.activerecom=item;
+					reswiper.updateSlides();
+					reswiper.slideTo(0,0);
+				}
+			},
+			computed:{
+				compu_recommendObj:function(){
+					const recommendObj = this.recommendObj;
+					const maxlength=5;
+					const arr=[];
+					const obj=JSON.parse(JSON.stringify(recommendObj));
+					for(var item in obj){
+						var oparr=obj[item];
+						let len=oparr.length;
+						var smallobj={};
+						for(var i=0;i<len;i++){
+							var index=Math.floor(i/maxlength);
+							smallobj[index]=!!smallobj[index]?smallobj[index]:[];
+							smallobj[index].push(oparr[i]);
+						}
+						obj[item]=smallobj;
+					}
+					return obj;
+				}
+			},
+			created:function(){
+				console.log(this.compu_recommendObj)
+				
 			}
 		})
 	</script>
