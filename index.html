@@ -56,23 +56,23 @@
 				<div class="reswiper swiper-container">
 					<div class="swiper-wrapper">
 						<div class="swiper-slide reslide swiper-no-swiping" v-for="(item,keyn) in compu_recommendObj[activerecom]" :key="keyn">
-							<div class="wupin" v-for="(wuitem,wuindex) in item" :key="wuitem.id">
+							<a :href="wuitem.url" class="wupin" v-for="(wuitem,wuindex) in item" :key="wuitem.id">
 								<img :src="wuitem.img" class="wuimg" />
 								<div class="midwu">
 									<div class="wutitle oneline">{{wuitem.title}}</div>
 									<div class="wudesc oneline">{{wuitem.desc}}</div>
 								</div>
-								<a :href="wuitem.url"><div class="wuopera">{{wuitem.type}}</div></a>
-							</div>
+								<div class="wuopera">{{wuitem.type}}</div>
+							</a>
 						</div>
 					</div>
 				</div>
 				<div class="operare">
 					<div class="opwrap" @click="oppre">
-						<div class="tri up"></div>
+						<img src="src/up.jpg" class="tri" >
 					</div>
 					<div class="opwrap" @click="opnext">
-						<div class="tri down"></div>
+						<img src="src/down.jpg" class="tri" >
 					</div>
 				</div>
 			 </div>
@@ -97,6 +97,7 @@
 		window.onpageshow=function(){
 			setHtmlFoot();
 		}
+		setHtmlFoot();
 		//截流
 		function debounce(fn,time){
 			var timer=null;
@@ -153,12 +154,12 @@
 					{
 						id:1,
 						img:"./src/banner.png",
-						url:'./detail.html?img=./src/detail1.png'
+						url:'./detail.html?img=./src/link/detail1.jpg'
 					},
 					{
 						id:2,
 						img:"./src/banner.png",
-						url:'./detail.html?img=./src/detail2.jpg'
+						url:'./detail.html?img=./src/link/detail1.jpg'
 					}					
 				],
 				onlinelist:[
@@ -197,146 +198,74 @@
 					{
 						id:1,
 						img:"./src/top1.png",
-						url:'./detail.html?img=./src/detail2.jpg'
+						url:'./detail.html?img=./src/link/detail2.jpg'
 					},
 					{
 						id:2, 
 						img:"./src/top2.png",
 						title:"9折玩转四大主题乐园",
 						name:"中国银行信用卡",
-						url:'./detail.html?img=./src/detail1.png'
+						url:'./detail.html?img=./src/link/detail3.jpg'
 					},
 					{
 						id:3,
 						img:"./src/top3.png",
 						title:"天天5折享美食",
 						name:"浦发银行信用卡",
-						url:'./detail.html?img=./src/detail2.jpg'
+						url:'./detail.html?img=./src/link/detail4.jpg'
 					}
 				],
-				recommendlist:['中国银行','招商银行','浦发银行','中信银行'],
+				recommendlist:['中国银行','招商银行','浦发银行','邮储银行'],
 				activerecom:'招商银行',
 				recommendObj:{
 					'中国银行':[
 						{
 							id:1,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
+							img:'./src/zhong1.jpg',
+							title:'快捷支付5倍积分',
+							desc:'微信、支付宝、京东支付等',
 							type:'查看详情',
-							url:'./detail.html?img=./src/detail1.png'
+							url:'./detail.html?img=./src/link/zg1.jpg'
 						},
 						{
 							id:2,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'哈根达斯7元抵扣券',
-							desc:'满35元立减',
-							type:'立即领取',
-							url:'./detail.html?img=./src/detail1.png'
+							img:'./src/zhong2.jpg',
+							title:'优惠购神州专车电子券',
+							desc:'20元购50元乘车券',
+							type:'查看详情',
+							url:'./detail.html?img=./src/link/zg2.jpg'
 						},
 						{
 							id:3,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'星巴克8元抵扣券',
-							desc:'满28元立减',
-							type:'查看详情',
-							url:'./detail.html?img=./src/detail1.png'
+							img:'./src/zhong3.jpg',
+							title:'1元抢30元话费',
+							desc:'手机银行信用卡新户专享',
+							type:'立即抢购',
+							url:'./detail.html?img=./src/link/zg3.jpg'
 						},
 						{
 							id:4,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'精选美食周三5折',
-							desc:'招行行用卡专享',
+							img:'./src/zhong4.jpg',
+							title:'每周二三五抢优惠券',
+							desc:'手机银行App上午十点开抢',
 							type:'立即领取',
-							url:'./detail.html?img=./src/detail1.png'
+							url:'./detail.html?img=./src/link/zg4.jpg'
 						},
 						{
 							id:5,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'品牌代金券大放送',
-							desc:'掌上生活APP疯狂领',
+							img:'./src/zhong5.jpg',
+							title:'网易严选5折购',
+							desc:'最高立减15元',
 							type:'查看详情',
-							url:'./detail.html?img=./src/detail1.png'
+							url:'./detail.html?img=./src/link/zg5.jpg'
 						},
 						{
 							id:6,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
+							img:'./src/zhong5.jpg',
+							title:'网易严选5折购',
+							desc:'最高立减15元',
 							type:'查看详情',
-							url:'./detail.html?img=./src/detail1.png'
-						},
-						{
-							id:7,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
-							type:'立即领取',
-							url:'./detail.html?img=./src/detail1.png'
-						},
-						{
-							id:8,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
-							type:'查看详情',
-							url:'./detail.html?img=./src/detail1.png'
-						},
-						{
-							id:9,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
-							type:'立即领取',
-							url:'./detail.html?img=./src/detail1.png'
-						},
-						{
-							id:10,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
-							type:'查看详情',
-							url:'./detail.html?img=./src/detail1.png'
-						},
-						{
-							id:11,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
-							type:'查看详情',
-							url:'./detail.html?img=./src/detail1.png'
-						},
-						{
-							id:12,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
-							type:'立即领取',
-							url:'./detail.html?img=./src/detail1.png'
-						},
-						{
-							id:13,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
-							type:'查看详情',
-							url:'./detail.html?img=./src/detail1.png'
-						},
-						{
-							id:14,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
-							type:'立即领取',
-							url:'./detail.html?img=./src/detail1.png'
-						},
-						{
-							id:15,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
-							type:'查看详情1',
-							url:'./detail.html?img=./src/detail1.png'
+							url:'./detail.html?img=./src/link/zg5.jpg'
 						}
 					],
 					'招商银行':[
@@ -346,7 +275,7 @@
 							title:'看电影立减15',
 							desc:'新户首购专享',
 							type:'查看详情',
-							url:'./detail.html?img=./src/detail1.png'
+							url:'./detail.html?img=./src/link/detail7.jpg'
 						},
 						{
 							id:2,
@@ -354,7 +283,7 @@
 							title:'哈根达斯7元抵扣券',
 							desc:'满35元立减',
 							type:'立即领取',
-							url:'./detail.html?img=./src/detail1.png'
+							url:'./detail.html?img=./src/link/detail8.jpg'
 						},
 						{
 							id:3,
@@ -362,7 +291,7 @@
 							title:'星巴克8元抵扣券',
 							desc:'满28元立减',
 							type:'查看详情',
-							url:'./detail.html?img=./src/detail1.png'
+							url:'./detail.html?img=./src/link/detail9.jpg'
 						},
 						{
 							id:4,
@@ -370,7 +299,7 @@
 							title:'精选美食周三5折',
 							desc:'招行行用卡专享',
 							type:'立即领取',
-							url:'./detail.html?img=./src/detail1.png'
+							url:'./detail.html?img=./src/link/detail10.jpg'
 						},
 						{
 							id:5,
@@ -378,91 +307,115 @@
 							title:'品牌代金券大放送',
 							desc:'掌上生活APP疯狂领',
 							type:'查看详情',
-							url:'./detail.html?img=./src/detail1.png'
+							url:'./detail.html?img=./src/link/detail11.jpg'
+						},
+						{
+							id:6,
+							img:'./src/zhao5.jpg',
+							title:'品牌代金券大放送',
+							desc:'掌上生活APP疯狂领',
+							type:'查看详情',
+							url:'./detail.html?img=./src/link/detail11.jpg'
 						}
 					],
 					'浦发银行':[
 						{
 							id:1,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
+							img:'./src/pu1.jpg',
+							title:'红宝石纸杯冰淇淋专享价',
+							desc:'每人每周限购2张',
 							type:'查看详情',
-							url:'./detail.html?img=./src/detail1.png'
+							url:'./detail.html?img=./src/link/pufa1.jpg'
 						},
 						{
 							id:2,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
+							img:'./src/pu2.jpg',
+							title:'必胜客专享代金券',
+							desc:'刷浦发信用卡支付40元抵50元',
 							type:'立即领取',
-							url:'./detail.html?img=./src/detail1.png'
+							url:'./detail.html?img=./src/link/pufa2.jpg'
 						},
 						{
 							id:3,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
-							type:'查看详情',
-							url:'./detail.html?img=./src/detail1.png'
+							img:'./src/pu3.jpg',
+							title:'积分兑视频App会员',
+							desc:'优酷、腾讯、爱奇艺随心享',
+							type:'立即兑换',
+							url:'./detail.html?img=./src/link/pufa3.jpg'
 						},
 						{
 							id:4,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
-							type:'立即领取',
-							url:'./detail.html?img=./src/detail1.png'
+							img:'./src/pu4.jpg',
+							title:'哈根达斯代金券7折购',
+							desc:'70元抵100元',
+							type:'查看详情',
+							url:'./detail.html?img=./src/link/pufa4.jpg'
 						},
 						{
 							id:5,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
-							type:'查看详情',
-							url:'./detail.html?img=./src/detail1.png'
+							img:'./src/pu5.jpg',
+							title:'积分兑本来生活百元代金券',
+							desc:'浦发信用卡专享价',
+							type:'立即兑换',
+							url:'./detail.html?img=./src/link/pufa5.jpg'
+						},
+						{
+							id:6,
+							img:'./src/pu5.jpg',
+							title:'积分兑本来生活百元代金券',
+							desc:'浦发信用卡专享价',
+							type:'立即兑换',
+							url:'./detail.html?img=./src/link/pufa5.jpg'
 						}
 					],
-					'中信银行':[
+					'邮储银行':[
 						{
 							id:1,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
+							img:'./src/yc1.jpg',
+							title:'办轻松小熊信用卡送好礼',
+							desc:'正版周边钱包、卡套任意领',
 							type:'查看详情',
-							url:'./detail.html?img=./src/detail1.png'
+							url:'./detail.html?img=./src/link/yc1.jpg'
 						},
 						{
 							id:2,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
+							img:'./src/yc2.jpg',
+							title:'下载信用卡App领话费',
+							desc:'邮储信用卡App新户专享',
 							type:'立即领取',
-							url:'./detail.html?img=./src/detail1.png'
+							url:'./detail.html?img=./src/link/yc2.jpg'
 						},
 						{
 							id:3,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
+							img:'./src/yc3.jpg',
+							title:'万事达信用卡境外刷卡返现',
+							desc:'最高可返30%',
 							type:'查看详情',
-							url:'./detail.html?img=./src/detail1.png'
+							url:'./detail.html?img=./src/link/yc3.jpg'
 						},
 						{
 							id:4,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
-							type:'立即领取',
-							url:'./detail.html?img=./src/detail1.png'
+							img:'./src/yc4.jpg',
+							title:'首刷&分期送百元礼券',
+							desc:'加油券、话费、购物券',
+							type:'查看详情',
+							url:'./detail.html?img=./src/link/yc4.jpg'
 						},
 						{
 							id:5,
-							img:'https://openapi.stogram.cn//uploads/image/20181107/12/37adc465fa306b98f770201d9f241031.jpeg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
+							img:'./src/yc5.jpg',
+							title:'华润万家购物最高立减50元',
+							desc:'指定周六周日上午十点',
 							type:'查看详情',
-							url:'./detail.html?img=./src/detail1.png'
+							url:'./detail.html?img=./src/link/yc5.jpg'
+						},
+						{
+							id:6,
+							img:'./src/yc5.jpg',
+							title:'华润万家购物最高立减50元',
+							desc:'指定周六周日上午十点',
+							type:'查看详情',
+							url:'./detail.html?img=./src/link/yc5.jpg'
 						}
 					]
 				},
@@ -471,13 +424,13 @@
 						id:1,
 						title:'12306购票低至五折，马上出发！',
 						img:'./src/news2.png',
-						url:'./detail.html?img=./src/detail2.jpg'
+						url:'./detail.html?img=./src/link/detail5.jpg'
 					},
 					{
 						id:2,
 						title:'推荐亲友办卡，最高可领500元天猫购物券，时间有限，速度扩散吧~',
 						img:'./src/news1.png',
-						url:'./detail.html?img=./src/detail2.jpg'
+						url:'./detail.html?img=./src/link/detail6.jpg'
 					}
 				]
 			},
@@ -514,10 +467,6 @@
 					}
 					return obj;
 				}
-			},
-			created:function(){
-				console.log(this.compu_recommendObj)
-				
 			}
 		})
 	</script>

@@ -1,6 +1,12 @@
-*{margin:0;padding:0;}
+*{
+	margin:0;
+	padding:0;
+	-webkit-user-select: none;
+	user-select: none;
+}
 a{
 	text-decoration: none;
+	-webkit-tap-highlight-color: transparent;
 }
 #app{
 	overflow-x: hidden;
@@ -95,17 +101,19 @@ a{
 	float:right;
 }
 .tag{
-	width:0.66rem;
-	height:0.34rem;
-	line-height: 0.34rem;
+	width:0.8rem;
+	height:0.38rem;
+	display: flex;
+	display: -webkit-flex;
+	align-items: center;
 	border-top-left-radius: 0.17rem;
 	border-bottom-left-radius: 0.17rem;
 	background-color: #ff4e00;
 	color:white;
-	text-align: center;
+	text-indent: 0.17rem;
 	position:absolute;
 	right:0;
-	font-size: 0.16rem;
+	font-size: 0.24rem;
 	top:0.2rem;
 }
 .bargaintitle{
@@ -119,6 +127,7 @@ a{
 	font-size: 0.23rem;
 	color:#7a7a7a;
 	text-indent: 0.14rem;
+	padding-top: 0.08rem;
 }
 .bbtn{
 	width:1.3rem;
@@ -187,16 +196,17 @@ a{
 .wuopera{
 	width:80px;
 	height:25px;
-	line-height:25px;
-	vertical-align: middle;
+	display: flex;
+	display: -webkit-flex;
+	justify-content: center;
+	align-items: center;
 	font-size: 14px;
 	font-weight: bold;
 	color:white;
 	background-color: #ec9d40;
-	text-align: center;
 	border-radius: 5px;
 	flex-shrink: 0;
-	margin-right: 28px;
+	margin-right: 18px;
 }
 .wupin{
 	height:20%;
@@ -251,22 +261,6 @@ a{
 	justify-content: center;
 	align-items: center;
 }
-.tri{
-	width:0.4rem;
-	height:0.4rem;
-	border-radius: 0.1rem;
-	transform: rotate(45deg);
-	-webkit-transform: rotate(45deg);
-	margin:0 auto;
-}
-.down{
-	background-image: linear-gradient(to right bottom,white 50%,#c6c6c6 50%);
-}
-.up{
-	transform-origin: left bottom;
-	-webkit-transform-origin: left bottom;
-	background-image: linear-gradient(to right bottom,#c6c6c6 50%,white 50%);
-}
 .opwrap{
 	width:1.8rem;
 	height:100%;
@@ -274,4 +268,7 @@ a{
 	display: -webkit-flex;
 	justify-content: center;
 	align-items: center;
+}
+.tri{
+	width:0.42rem;
 }
