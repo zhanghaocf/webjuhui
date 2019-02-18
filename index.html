@@ -21,7 +21,7 @@
 				<div class="swiper-pagination"></div>
 			</div>
 			<div class="onlineBrand borderbottomgray">
-				<div class="text">在线品牌</div>
+				<div class="text">品牌活动</div>
 				<div class="onlineswiper">
 					<div class="swiper-wrapper">
 						<div class="swiper-slide onlineslide" v-for="item in onlinelist" :key="item.id">
@@ -36,10 +36,10 @@
 				<div class='text'>超值特惠</div>
 				<a v-for="(item , index) in tehui" :class="'top'+(index+1)" :key="item.id" :href="item.url">
 					<img class="bargainimg" :src='item.img' />
-				  	<div class='tag' v-if="index!=0">No.{{index+1}}</div>
+				  	<div class='tag'>No.{{index+1}}</div>
 				  	<div v-if="!!item.title" class="bargaintitle oneline">{{item.title}}</div>
 				  	<div v-if="!!item.name">
-					  	<div class="bbtn">无卡申请</div>
+					  	<!-- <div class="bbtn">无卡申请</div> -->
 					  	<div class="bname oneline">{{item.name}}</div>
 				  	</div>
 				</a>
@@ -62,7 +62,7 @@
 									<div class="wutitle oneline">{{wuitem.title}}</div>
 									<div class="wudesc oneline">{{wuitem.desc}}</div>
 								</div>
-								<div class="wuopera">{{wuitem.type}}</div>
+								<div class="wuopera"><span>{{wuitem.type}}</span></div>
 							</a>
 						</div>
 					</div>
@@ -77,7 +77,7 @@
 				</div>
 			 </div>
 			<div class="news">
-				<div class='text'>超值资讯</div>
+				<div class='text'>热卡推荐</div>
 				<a class="newlist" v-for="item in newslist" :key="item.id" :href="item.url">
 					<div class="newstitle">{{item.title}}</div>
 					<img :src="item.img" class="newsimg" />
