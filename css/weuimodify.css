@@ -1,0 +1,12 @@
+/* 此处针对本项目修改weui样式 */
+.weui-icon_toast{
+  margin:0.44rem 0 0;
+}
+.weui-icon_toast.weui-icon-success-no-circle:before {
+    font-size: 1.1rem;
+}
+.weui-icon_toast.weui-loading {
+    margin: 0.6rem 0 0;
+    width: 0.76rem;
+    height: 0.76rem;
+}

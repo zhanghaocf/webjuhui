@@ -4,12 +4,21 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>金融频道</title>
+		<link rel="stylesheet" type="text/css" href="css/weui.css"/>
 		<link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
 		<link rel="stylesheet" type="text/css" href="css/main.css"/>
+		<link rel="stylesheet" type="text/css" href="css/weuimodify.css"/>
 	</head>
 	<body>
 		<div id="app" v-cloak>
-			<div class="swiper-container bannerswiper borderbottomgray">
+			<div id="loadingToast" v-show="isLoading">
+				<div class="weui-mask_transparent"></div>
+				<div class="weui-toast">
+					<i class="weui-loading weui-icon_toast"></i>
+					<p class="weui-toast__content">数据加载中</p>
+				</div>
+			</div>
+			<div v-if="bannerList.length>0" class="swiper-container bannerswiper borderbottomgray">
 				<div class="swiper-wrapper">
 					<div class="swiper-slide" v-for="item in bannerList" :key="item.id">
 						<a :href="item.url">
@@ -87,6 +96,7 @@
 	</body>
 	<script src="js/vue.min.js"></script>
 	<script src="js/swiper.min.js"></script>
+	<script src="js/axios.min.js"></script>
 	<script>
 		function setHtmlFoot(){
 			var win=document.documentElement||document.getElementsByTagName("html")[0];
@@ -149,19 +159,9 @@
 		var vm=new Vue({
 			el:'#app',
 			data:{
+				isLoading:false,
 				swipercount:1,//专属推荐页面个数
-				bannerList: [
-					{
-						id:1,
-						img:"./src/banner.png",
-						url:'./detail.html?img=./src/link/detail1.jpg'
-					},
-					{
-						id:2,
-						img:"./src/banner.png",
-						url:'./detail.html?img=./src/link/detail1.jpg'
-					}					
-				],
+				bannerList: [],
 				onlinelist:[
 				  {
 					id:1,
@@ -446,6 +446,9 @@
 					this.activerecom=item;
 					reswiper.updateSlides();
 					reswiper.slideTo(0,0);
+				},
+				getBannerhttp:function(){
+					return axios.get('./js/mock.js');
 				}
 			},
 			computed:{
@@ -467,6 +470,25 @@
 					}
 					return obj;
 				}
+			},
+			created:function(){
+				var ths=this;
+				ths.getBannerhttp().then(function(res){
+					setTimeout(function(){
+						ths.bannerList=[
+							{
+								id:1,
+								img:"./src/banner.png",
+								url:'./detail.html?img=./src/link/detail1.jpg'
+							},
+							{
+								id:2,
+								img:"./src/banner.png",
+								url:'./detail.html?img=./src/link/detail1.jpg'
+							}					
+						]
+					},1000)
+				})
 			}
 		})
 	</script>
