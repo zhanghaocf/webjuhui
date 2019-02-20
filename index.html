@@ -40,6 +40,9 @@
 						</div>
 					</div>
 				</div>
+				<div v-if="onlinelist.length===0" style="text-align: center;">
+					<noinfo info="品牌活动需再等等"></noinfo>
+				</div>
 			</div>
 			<div class='bargain borderbottomgray'>
 				<div class='text'>超值特惠</div>
@@ -52,31 +55,35 @@
 					  	<div class="bname oneline">{{item.name}}</div>
 				  	</div>
 				</a>
+				<div v-if="tehui.length===0" style="text-align: center;">
+					<noinfo info="超值特惠很快就会有哦~"></noinfo>
+				</div>
 			 </div>
 			 <div class="recommend borderbottomgray">
 			 	<div class='text'>专属推荐</div>
-			 	<div class="recommendswiper">
-					<div class="swiper-wrapper">
-						<div class="swiper-slide recommendslide"  v-for="item in recommendlist" :key="item" @click="selectrecom(item)">
-							<span class="zhushuspan" :class="[activerecom===item?'activerecommend':'']">{{item}}</span>
+				<div v-if="recommendlist.length>0">
+					<div class="recommendswiper">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide recommendslide"  v-for="item in recommendlist" :key="item" @click="selectrecom(item)">
+								<span class="zhushuspan" :class="[activerecom===item?'activerecommend':'']">{{item}}</span>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="reswiper swiper-container">
-					<div class="swiper-wrapper">
-						<div class="swiper-slide reslide swiper-no-swiping" v-for="(item,keyn) in compu_recommendObj[activerecom]" :key="keyn">
-							<a :href="wuitem.url" class="wupin" v-for="(wuitem,wuindex) in item" :key="wuitem.id">
-								<img :src="wuitem.img" class="wuimg" />
-								<div class="midwu">
-									<div class="wutitle oneline">{{wuitem.title}}</div>
-									<div class="wudesc oneline">{{wuitem.desc}}</div>
-								</div>
-								<div class="wuopera"><span>{{wuitem.type}}</span></div>
-							</a>
+					<div class="reswiper swiper-container">
+						<div class="swiper-wrapper">
+							<div class="swiper-slide reslide swiper-no-swiping" v-for="(item,keyn) in compu_recommendObj[activerecom]" :key="keyn">
+								<a :href="wuitem.url" class="wupin" v-for="(wuitem,wuindex) in item" :key="wuitem.id">
+									<img :src="wuitem.img" class="wuimg" />
+									<div class="midwu">
+										<div class="wutitle oneline">{{wuitem.title}}</div>
+										<div class="wudesc oneline">{{wuitem.desc}}</div>
+									</div>
+									<div class="wuopera"><span>{{wuitem.type}}</span></div>
+								</a>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="operare">
+					<div class="operare">
 					<div class="opwrap" @click="oppre">
 						<img src="src/up.jpg" class="tri" >
 					</div>
@@ -85,12 +92,19 @@
 					</div>
 				</div>
 			 </div>
+			 <div v-if="recommendlist.length===0" style="text-align: center;">
+			 	<noinfo info="专属推荐需再等等"></noinfo>
+			 </div>
+			</div>
 			<div class="news">
 				<div class='text'>热卡推荐</div>
 				<a class="newlist" v-for="item in newslist" :key="item.id" :href="item.url">
 					<div class="newstitle">{{item.title}}</div>
 					<img :src="item.img" class="newsimg" />
 				<a>
+				<div v-if="newslist.length===0" style="text-align: center;">
+					<noinfo info="最新信息还没出炉哦~"></noinfo>
+				</div>
 			</div>
 		</div>
 	</body>
@@ -125,35 +139,6 @@
 			setsize();
 		}
 	</script>
-	<script>
-		var reswiper=null;
-		//banner图
-		window.onload=function(){
-			var mySwiper = new Swiper ('.bannerswiper', {
-			loop: true, // 循环模式选项
-			autoplay: {
-				delay: 6000,
-				stopOnLastSlide: false,
-				disableOnInteraction: false,
-				},
-			// 如果需要分页器
-			pagination: {
-			  el: '.swiper-pagination',
-			}
-		  })     
-		  var onlineSwiper = new Swiper ('.onlineswiper', {
-				slidesPerView : 4,
-				slidesPerGroup : 1,
-			  })
-		  var recommendswiper=new Swiper ('.recommendswiper', {
-				slidesPerView : 3,
-				slidesPerGroup : 1,
-			  })
-		  reswiper=new Swiper ('.reswiper', {
-			direction : 'vertical'
-			})
-		}
-  </script>
 	</script>
 	<script>
 		var vm=new Vue({
@@ -161,294 +146,109 @@
 			data:{
 				isLoading:false,
 				swipercount:1,//专属推荐页面个数
-				bannerList: [],
-				onlinelist:[
-				  {
-					id:1,
-					img: "./src/online1.jpg",
-					text:'饮品随机减',
-					ishot:true
-				  },
-				  {
-					id: 2,
-					img: "./src/online2.jpg",
-					text: '5元抵扣券',
-					ishot:false
-				  },
-				  {
-					id: 3,
-					img: "./src/online3.jpg",
-					text: '领半价饭票',
-					ishot:false
-				  },
-				  {
-					id: 4,
-					img: "./src/online4.jpg",
-					text: '周三享5折',
-					ishot:false
-				  },
-				  {
-					id: 5,
-					img: "./src/online5.jpg",
-					text: '折扣券放送',
-					ishot:false
-				  }
-				],
-				tehui:[
-					{
-						id:1,
-						img:"./src/top1.png",
-						url:'./detail.html?img=./src/link/detail2.jpg'
-					},
-					{
-						id:2, 
-						img:"./src/top2.png",
-						title:"9折玩转四大主题乐园",
-						name:"中国银行信用卡",
-						url:'./detail.html?img=./src/link/detail3.jpg'
-					},
-					{
-						id:3,
-						img:"./src/top3.png",
-						title:"天天5折享美食",
-						name:"浦发银行信用卡",
-						url:'./detail.html?img=./src/link/detail4.jpg'
-					}
-				],
-				recommendlist:['中国银行','招商银行','浦发银行','邮储银行'],
-				activerecom:'招商银行',
-				recommendObj:{
-					'中国银行':[
-						{
-							id:1,
-							img:'./src/zhong1.jpg',
-							title:'快捷支付5倍积分',
-							desc:'微信、支付宝、京东支付等',
-							type:'查看详情',
-							url:'./detail.html?img=./src/link/zg1.jpg'
-						},
-						{
-							id:2,
-							img:'./src/zhong2.jpg',
-							title:'优惠购神州专车电子券',
-							desc:'20元购50元乘车券',
-							type:'查看详情',
-							url:'./detail.html?img=./src/link/zg2.jpg'
-						},
-						{
-							id:3,
-							img:'./src/zhong3.jpg',
-							title:'1元抢30元话费',
-							desc:'手机银行信用卡新户专享',
-							type:'立即抢购',
-							url:'./detail.html?img=./src/link/zg3.jpg'
-						},
-						{
-							id:4,
-							img:'./src/zhong4.jpg',
-							title:'每周二三五抢优惠券',
-							desc:'手机银行App上午十点开抢',
-							type:'立即领取',
-							url:'./detail.html?img=./src/link/zg4.jpg'
-						},
-						{
-							id:5,
-							img:'./src/zhong5.jpg',
-							title:'网易严选5折购',
-							desc:'最高立减15元',
-							type:'查看详情',
-							url:'./detail.html?img=./src/link/zg5.jpg'
-						},
-						{
-							id:6,
-							img:'./src/zhong5.jpg',
-							title:'网易严选5折购',
-							desc:'最高立减15元',
-							type:'查看详情',
-							url:'./detail.html?img=./src/link/zg5.jpg'
-						}
-					],
-					'招商银行':[
-						{
-							id:1,
-							img:'./src/zhao1.jpg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
-							type:'查看详情',
-							url:'./detail.html?img=./src/link/detail7.jpg'
-						},
-						{
-							id:2,
-							img:'./src/zhao2.jpg',
-							title:'哈根达斯7元抵扣券',
-							desc:'满35元立减',
-							type:'立即领取',
-							url:'./detail.html?img=./src/link/detail8.jpg'
-						},
-						{
-							id:3,
-							img:'./src/zhao3.jpg',
-							title:'星巴克8元抵扣券',
-							desc:'满28元立减',
-							type:'查看详情',
-							url:'./detail.html?img=./src/link/detail9.jpg'
-						},
-						{
-							id:4,
-							img:'./src/zhao4.jpg',
-							title:'精选美食周三5折',
-							desc:'招行行用卡专享',
-							type:'立即领取',
-							url:'./detail.html?img=./src/link/detail10.jpg'
-						},
-						{
-							id:5,
-							img:'./src/zhao5.jpg',
-							title:'品牌代金券大放送',
-							desc:'掌上生活APP疯狂领',
-							type:'查看详情',
-							url:'./detail.html?img=./src/link/detail11.jpg'
-						},
-						{
-							id:6,
-							img:'./src/zhao5.jpg',
-							title:'品牌代金券大放送',
-							desc:'掌上生活APP疯狂领',
-							type:'查看详情',
-							url:'./detail.html?img=./src/link/detail11.jpg'
-						}
-					],
-					'浦发银行':[
-						{
-							id:1,
-							img:'./src/pu1.jpg',
-							title:'红宝石纸杯冰淇淋专享价',
-							desc:'每人每周限购2张',
-							type:'查看详情',
-							url:'./detail.html?img=./src/link/pufa1.jpg'
-						},
-						{
-							id:2,
-							img:'./src/pu2.jpg',
-							title:'必胜客专享代金券',
-							desc:'刷浦发信用卡支付40元抵50元',
-							type:'立即领取',
-							url:'./detail.html?img=./src/link/pufa2.jpg'
-						},
-						{
-							id:3,
-							img:'./src/pu3.jpg',
-							title:'积分兑视频App会员',
-							desc:'优酷、腾讯、爱奇艺随心享',
-							type:'立即兑换',
-							url:'./detail.html?img=./src/link/pufa3.jpg'
-						},
-						{
-							id:4,
-							img:'./src/pu4.jpg',
-							title:'哈根达斯代金券7折购',
-							desc:'70元抵100元',
-							type:'查看详情',
-							url:'./detail.html?img=./src/link/pufa4.jpg'
-						},
-						{
-							id:5,
-							img:'./src/pu5.jpg',
-							title:'积分兑本来生活百元代金券',
-							desc:'浦发信用卡专享价',
-							type:'立即兑换',
-							url:'./detail.html?img=./src/link/pufa5.jpg'
-						},
-						{
-							id:6,
-							img:'./src/pu5.jpg',
-							title:'积分兑本来生活百元代金券',
-							desc:'浦发信用卡专享价',
-							type:'立即兑换',
-							url:'./detail.html?img=./src/link/pufa5.jpg'
-						}
-					],
-					'邮储银行':[
-						{
-							id:1,
-							img:'./src/yc1.jpg',
-							title:'办轻松小熊信用卡送好礼',
-							desc:'正版周边钱包、卡套任意领',
-							type:'查看详情',
-							url:'./detail.html?img=./src/link/yc1.jpg'
-						},
-						{
-							id:2,
-							img:'./src/yc2.jpg',
-							title:'下载信用卡App领话费',
-							desc:'邮储信用卡App新户专享',
-							type:'立即领取',
-							url:'./detail.html?img=./src/link/yc2.jpg'
-						},
-						{
-							id:3,
-							img:'./src/yc3.jpg',
-							title:'万事达信用卡境外刷卡返现',
-							desc:'最高可返30%',
-							type:'查看详情',
-							url:'./detail.html?img=./src/link/yc3.jpg'
-						},
-						{
-							id:4,
-							img:'./src/yc4.jpg',
-							title:'首刷&分期送百元礼券',
-							desc:'加油券、话费、购物券',
-							type:'查看详情',
-							url:'./detail.html?img=./src/link/yc4.jpg'
-						},
-						{
-							id:5,
-							img:'./src/yc5.jpg',
-							title:'华润万家购物最高立减50元',
-							desc:'指定周六周日上午十点',
-							type:'查看详情',
-							url:'./detail.html?img=./src/link/yc5.jpg'
-						},
-						{
-							id:6,
-							img:'./src/yc5.jpg',
-							title:'华润万家购物最高立减50元',
-							desc:'指定周六周日上午十点',
-							type:'查看详情',
-							url:'./detail.html?img=./src/link/yc5.jpg'
-						}
-					]
-				},
-				newslist:[
-					{
-						id:1,
-						title:'12306购票低至五折，马上出发！',
-						img:'./src/news2.png',
-						url:'./detail.html?img=./src/link/detail5.jpg'
-					},
-					{
-						id:2,
-						title:'推荐亲友办卡，最高可领500元天猫购物券，时间有限，速度扩散吧~',
-						img:'./src/news1.png',
-						url:'./detail.html?img=./src/link/detail6.jpg'
-					}
-				]
+				bannerList: [],//轮播图列表
+				onlinelist:[],//品牌活动列表
+				tehui:[],//超值特惠列表
+				reswiper:null,//专属推荐每银行活动的swiper
+				activerecom:'',//默认选中的银行
+				recommendObj:{},//获取每个银行以及所属活动列表
+				newslist:[]//热卡推荐数据
 			},
 			methods:{
 				opnext:function(){
-					reswiper.updateSlides();
-					reswiper.slideNext();
+					this.reswiper.updateSlides();
+					this.reswiper.slideNext();
 				},
 				oppre:function(){
-					reswiper.slidePrev();
+					this.reswiper.slidePrev();
 				},
 				selectrecom:function(item){
 					this.activerecom=item;
-					reswiper.updateSlides();
-					reswiper.slideTo(0,0);
+					this.reswiper.updateSlides();
+					this.reswiper.slideTo(0,0);
 				},
+				//获取banner轮播图样式资源
 				getBannerhttp:function(){
-					return axios.get('./js/mock.js');
+					var ths=this;
+					return axios.get('https://www.easy-mock.com/mock/5c468f8d3ea95957a403a95a/zhgroot/getbannerList')
+											.then(function(res){
+													ths.bannerList=res.data.data.list;
+													ths.$nextTick(function(){
+														//实例化轮播图swiper
+														var mySwiper = new Swiper ('.bannerswiper', {
+															loop: true, // 循环模式选项
+															autoplay: {
+																delay: 6000,
+																stopOnLastSlide: false,
+																disableOnInteraction: false,
+																},
+															// 如果需要分页器
+															pagination: {
+																el: '.swiper-pagination',
+															}
+														})
+													});
+											})
+				},
+				//获取品牌活动列表
+				getBrandhttp:function(){
+					var ths=this;
+					return axios.get('https://www.easy-mock.com/mock/5c468f8d3ea95957a403a95a/zhgroot/getonlinelist')
+											.then(function(res){
+												ths.onlinelist=res.data.data.onlinelist;
+												ths.$nextTick(function(){
+													//实例化品牌活动swiper
+													var onlineSwiper = new Swiper ('.onlineswiper', {
+														slidesPerView : 4,
+														slidesPerGroup : 1,
+														})
+												});
+												
+											})
+				},
+				//获取超值特惠数据
+				getTehuihttp:function(){
+					var ths=this;
+					return axios.get('https://www.easy-mock.com/mock/5c468f8d3ea95957a403a95a/zhgroot/getTehuilist')
+											.then(function(res){
+												ths.tehui=res.data.data.tehui;
+											})
+				},
+				//获取专属推荐数据
+				getRecommendhttp:function(){
+					var ths=this;
+					return axios.get('https://www.easy-mock.com/mock/5c468f8d3ea95957a403a95a/zhgroot/getRecommendList')
+											.then(function(res){
+												let recommendObj=res.data.data.recommendObj||{};
+												ths.recommendObj=recommendObj;
+ 												let arr=Object.keys(recommendObj);
+ 												ths.activerecom=arr.length>0?arr[0]:'无';
+												ths.$nextTick(function(){
+														var recommendswiper=new Swiper ('.recommendswiper', {
+															slidesPerView : 3,
+															slidesPerGroup : 1,
+															})
+														ths.reswiper=new Swiper ('.reswiper', {
+															direction : 'vertical'
+															})
+												})
+											})
+				},
+				//获取最新信息数据
+				getNewshttp:function(){
+					var ths=this;
+					return axios.get('https://www.easy-mock.com/mock/5c468f8d3ea95957a403a95a/zhgroot/getNewsList')
+											.then(function(res){
+												ths.newslist=res.data.data.newslist;
+											})
+				},
+				togetherhttp:function(){
+					let ths=this;
+					ths.isLoading=true;
+					var arr=[this.getBannerhttp(),this.getBrandhttp(),this.getTehuihttp(),this.getRecommendhttp(),this.getNewshttp()];
+					return axios.all(arr).then(function(){
+						ths.isLoading=false;
+					})
 				}
 			},
 			computed:{
@@ -469,26 +269,21 @@
 						obj[item]=smallobj;
 					}
 					return obj;
+				},
+				recommendlist:function(){
+					const recommendObj = this.recommendObj;
+					const arr=[];
+					return [...Object.keys(recommendObj)];
 				}
 			},
 			created:function(){
-				var ths=this;
-				ths.getBannerhttp().then(function(res){
-					setTimeout(function(){
-						ths.bannerList=[
-							{
-								id:1,
-								img:"./src/banner.png",
-								url:'./detail.html?img=./src/link/detail1.jpg'
-							},
-							{
-								id:2,
-								img:"./src/banner.png",
-								url:'./detail.html?img=./src/link/detail1.jpg'
-							}					
-						]
-					},1000)
-				})
+				this.togetherhttp();
+			},
+			components:{
+				'noinfo':{
+					props:['info'],
+					template:'<div style="display:inline-block"><img class="noinfoimg" style="width:2rem" src="./src/default.png" /><p style="color:#ccc">{{info}}</p></div>',
+				}
 			}
 		})
 	</script>
