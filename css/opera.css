@@ -12,7 +12,6 @@
 	line-height: 1.2rem;
 }
 .z_house{
-	background-color: #333333;
 	width:2.1rem;
 }
 .z_houseimg{
@@ -23,8 +22,19 @@
 }
 .z_btn{
 	flex-grow: 1;
-	background-color: #222222;
 	font-size: 0.4rem;
 	font-weight: bold;
 	color:white;
+}
+.deep .z_btn{
+	background-color: #222222;
+}
+.deep .z_house{
+	background-color: #333333;
+}
+.light .z_btn{
+	background-color: #f95a30;
+}
+.light .z_house{
+	background-color: #ffa750;
 }

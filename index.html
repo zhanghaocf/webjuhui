@@ -6,6 +6,7 @@
 		<title>金融频道</title>
 		<link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
 		<link rel="stylesheet" type="text/css" href="css/main.css"/>
+		<script src="js/rem.js"></script>
 	</head>
 	<body>
 		<div id="app" v-cloak>
@@ -87,34 +88,6 @@
 	</body>
 	<script src="js/vue.min.js"></script>
 	<script src="js/swiper.min.js"></script>
-	<script>
-		function setHtmlFoot(){
-			var win=document.documentElement||document.getElementsByTagName("html")[0];
-			var winWidth=win.offsetWidth;
-			var footsize=100*winWidth/750;
-			win.style.fontSize=footsize+"px";
-		}
-		window.onpageshow=function(){
-			setHtmlFoot();
-		}
-		setHtmlFoot();
-		//截流
-		function debounce(fn,time){
-			var timer=null;
-			return function(){
-				clearTimeout(timer);
-				var args=arguments;
-				timer=setTimeout(function(){
-					fn.apply(null,args);
-					
-				},time)
-			}
-		}
-		var setsize=debounce(setHtmlFoot,300);
-		window.onresize=function(){
-			setsize();
-		}
-	</script>
 	<script>
 		var reswiper=null;
 		//banner图
@@ -220,109 +193,9 @@
 						url:'./detail/top3.html'
 					}
 				],
-				recommendlist:['浦发银行','中国银行','招商银行','邮储银行'],
+				recommendlist:['浦发银行','中信银行','光大银行','中国银行','民生银行','兴业银行','平安银行'],
 				activerecom:'浦发银行',
 				recommendObj:{
-					'中国银行':[
-						{
-							id:1,
-							img:'./src/zhong1.jpg',
-							title:'快捷支付5倍积分',
-							desc:'微信、支付宝、京东支付等',
-							type:'查看详情',
-							url:'https://mp.weixin.qq.com/s?__biz=MjM5MDcxNzI3NA==&mid=100006387&idx=1&sn=588510055648aa4ae2d482c9490cfc6b&chksm=2641ddc6113654d02ce3c630a4a202ebbf70febb3842b07dadd75509b9ca49613c991df6d977&mpshare=1&scene=1&srcid=0214rwk9ExkINuhdAAqQ8axX#rd'
-						},
-						{
-							id:2,
-							img:'./src/zhong2.jpg',
-							title:'优惠购神州专车电子券',
-							desc:'20元购50元乘车券',
-							type:'查看详情',
-							url:'https://mp.weixin.qq.com/s?__biz=MjM5MDcxNzI3NA==&mid=100006332&idx=2&sn=b61558ae71670d7eea8f7dfc5b0ad28f&chksm=2641dd891136549f295d48428b658c3a6b96236a0481d022b71608a0adb131b89d55896b153c&mpshare=1&scene=1&srcid=0214PGIwjdp6hBX7SEAZiiYX#rd'
-						},
-						{
-							id:3,
-							img:'./src/zhong3.jpg',
-							title:'1元抢30元话费',
-							desc:'手机银行信用卡新户专享',
-							type:'立即抢购',
-							url:'https://mp.weixin.qq.com/s?__biz=MjM5MDcxNzI3NA==&mid=100004987&idx=1&sn=b6721cfc9134f86383da8ee9f9f92c71&chksm=2641d04e11365958f2b419620cc038b4f004a3e9b89e2cf6a96731ba8200b061f6a5b9474f45&mpshare=1&scene=1&srcid=0214gC5J04AO2GWkBMFSrQtl#rd'
-						},
-						{
-							id:4,
-							img:'./src/zhong4.jpg',
-							title:'每周二三五抢优惠券',
-							desc:'手机银行App上午十点开抢',
-							type:'立即领取',
-							url:'https://mp.weixin.qq.com/s?__biz=MjM5MDcxNzI3NA==&mid=100004987&idx=2&sn=0425aa00c202251217da4442a705403e&chksm=2641d04e11365958c5f35fa75116a17b2f8b92f14cdb5a2a401424f9fbb0e3e63a9c9822dfb7&mpshare=1&scene=1&srcid=0214mcXDNgdo6JZix42BurOB#rd'
-						},
-						{
-							id:5,
-							img:'./src/zhong5.jpg',
-							title:'网易严选5折购',
-							desc:'最高立减15元',
-							type:'查看详情',
-							url:'https://mp.weixin.qq.com/s?__biz=MjM5MDcxNzI3NA==&mid=100006125&idx=2&sn=d6d6066efa256b8e0691fd16821edb9e&chksm=2641dcd8113655ce7aa26e383c49692a26c06a35887c6edec9ef9a24cd1cc669838fbf031248&mpshare=1&scene=1&srcid=0214DRQqFhmcDRR8ZFmnJVfS#rd'
-						},
-						{
-							id:6,
-							img:'./src/zhong5.jpg',
-							title:'网易严选5折购',
-							desc:'最高立减15元',
-							type:'查看详情',
-							url:'https://mp.weixin.qq.com/s?__biz=MjM5MDcxNzI3NA==&mid=100006125&idx=2&sn=d6d6066efa256b8e0691fd16821edb9e&chksm=2641dcd8113655ce7aa26e383c49692a26c06a35887c6edec9ef9a24cd1cc669838fbf031248&mpshare=1&scene=1&srcid=0214DRQqFhmcDRR8ZFmnJVfS#rd'
-						}
-					],
-					'招商银行':[
-						{
-							id:1,
-							img:'./src/zhao1.jpg',
-							title:'看电影立减15',
-							desc:'新户首购专享',
-							type:'查看详情',
-							url:'./detail.html?img=./src/link/detail7.jpg'
-						},
-						{
-							id:2,
-							img:'./src/zhao2.jpg',
-							title:'哈根达斯7元抵扣券',
-							desc:'满35元立减',
-							type:'立即领取',
-							url:'./detail.html?img=./src/link/detail8.jpg'
-						},
-						{
-							id:3,
-							img:'./src/zhao3.jpg',
-							title:'星巴克8元抵扣券',
-							desc:'满28元立减',
-							type:'查看详情',
-							url:'./detail.html?img=./src/link/detail9.jpg'
-						},
-						{
-							id:4,
-							img:'./src/zhao4.jpg',
-							title:'精选美食周三5折',
-							desc:'招行行用卡专享',
-							type:'立即领取',
-							url:'./detail.html?img=./src/link/detail10.jpg'
-						},
-						{
-							id:5,
-							img:'./src/zhao5.jpg',
-							title:'品牌代金券大放送',
-							desc:'掌上生活APP疯狂领',
-							type:'查看详情',
-							url:'./detail.html?img=./src/link/detail11.jpg'
-						},
-						{
-							id:6,
-							img:'./src/zhao5.jpg',
-							title:'品牌代金券大放送',
-							desc:'掌上生活APP疯狂领',
-							type:'查看详情',
-							url:'./detail.html?img=./src/link/detail11.jpg'
-						}
-					],
 					'浦发银行':[
 						{
 							id:1,
@@ -373,69 +246,319 @@
 							url:'https://ccc.spdb.com.cn/miniSite/1722/543a007/'
 						}
 					],
-					'邮储银行':[
+					'中信银行':[
 						{
 							id:1,
-							img:'./src/yc1.jpg',
-							title:'办轻松小熊信用卡送好礼',
-							desc:'正版周边钱包、卡套任意领',
-							type:'查看详情',
-							url:'./detail.html?img=./src/link/yc1.jpg'
+							img:'./src/zx1.jpg',
+							title:'指定商户5折/买一送一券',
+							desc:'每周三、周六上午11点限量抢',
+							type:'立即申请',
+							url:'https://creditcard.ecitic.com/youhui/120401/index.shtml'
 						},
 						{
 							id:2,
-							img:'./src/yc2.jpg',
-							title:'下载信用卡App领话费',
-							desc:'邮储信用卡App新户专享',
-							type:'立即领取',
-							url:'./detail.html?img=./src/link/yc2.jpg'
+							img:'./src/zx2.jpg',
+							title:'消费满额领星巴克便携咖啡机',
+							desc:'价值398，先到先得',
+							type:'立即申请',
+							url:'https://creditcard.ecitic.com/shenqing/jcb/index.shtml'
 						},
 						{
 							id:3,
-							img:'./src/yc3.jpg',
-							title:'万事达信用卡境外刷卡返现',
-							desc:'最高可返30%',
-							type:'查看详情',
-							url:'./detail.html?img=./src/link/yc3.jpg'
+							img:'./src/zx3.jpg',
+							title:'彭于晏喊你来开卡啦',
+							desc:'享物说百万好物任你兑',
+							type:'立即申请',
+							url:'https://creditcard.ecitic.com/shenqing/xiangwushuo/index.shtml'
 						},
 						{
 							id:4,
-							img:'./src/yc4.jpg',
-							title:'首刷&分期送百元礼券',
-							desc:'加油券、话费、购物券',
-							type:'查看详情',
-							url:'./detail.html?img=./src/link/yc4.jpg'
+							img:'./src/zx4.jpg',
+							title:'9积分畅享超值好礼',
+							desc:'星巴克、必胜客、哈根达斯尽情享',
+							type:'立即申请',
+							url:'https://creditcard.ecitic.com/youhui/120926/index.shtml'
 						},
 						{
 							id:5,
-							img:'./src/yc5.jpg',
-							title:'华润万家购物最高立减50元',
-							desc:'指定周六周日上午十点',
-							type:'查看详情',
-							url:'./detail.html?img=./src/link/yc5.jpg'
+							img:'./src/zx5.jpg',
+							title:'送你2000里程，赶快领！',
+							desc:'国航中信联名卡',
+							type:'立即申请',
+							url:'https://creditcard.ecitic.com/youhui/180404_3/index.shtml'
 						},
 						{
 							id:6,
-							img:'./src/yc5.jpg',
-							title:'华润万家购物最高立减50元',
-							desc:'指定周六周日上午十点',
+							img:'./src/zx5.jpg',
+							title:'送你2000里程，赶快领！',
+							desc:'国航中信联名卡',
+							type:'立即申请',
+							url:'https://creditcard.ecitic.com/youhui/180404_3/index.shtml'
+						}
+					],
+					'光大银行':[
+						{
+							id:1,
+							img:'./src/gd1.jpg',
+							title:'口碑支付享5折优惠',
+							desc:'超多门店参与，50元封顶',
+							type:'立即申请',
+							url:'https://xyk.cebbank.com/home/activities/searchDetail/category/details.htm?contentId=56475'
+						},
+						{
+							id:2,
+							img:'./src/gd2.jpg',
+							title:'小黄鸭周边大放送',
+							desc:'拍立得、保温杯、精美手账',
+							type:'立即申请',
+							url:'https://xyk.cebbank.com/home/activities/searchDetail/category/details.htm?contentId=56490'
+						},
+						{
+							id:3,
+							img:'./src/gd3.jpg',
+							title:'10元购热门爆款口红',
+							desc:'消费达标即享，快来拔草',
+							type:'立即申请',
+							url:'https://xyk.cebbank.com/home/activities/searchDetail/category/details.htm?contentId=56653'
+						},
+						{
+							id:4,
+							img:'./src/gd4.jpg',
+							title:'周三、周五10元看大片',
+							desc:'阳光惠生活APP内参与',
+							type:'立即申请',
+							url:'https://xyk.cebbank.com/home/activities/searchDetail/category/details.htm?contentId=55229'
+						},
+						{
+							id:5,
+							img:'./src/gd5.jpg',
+							title:'美团外卖，立享满减',
+							desc:'5000名额，先到先得',
+							type:'立即申请',
+							url:'https://xyk.cebbank.com/home/activities/searchDetail/category/details.htm?contentId=55633'
+						},
+						{
+							id:6,
+							img:'./src/gd5.jpg',
+							title:'美团外卖，立享满减',
+							desc:'5000名额，先到先得',
+							type:'立即申请',
+							url:'https://xyk.cebbank.com/home/activities/searchDetail/category/details.htm?contentId=55633'
+						}
+					],
+					'中国银行':[
+						{
+							id:1,
+							img:'./src/zhong1.jpg',
+							title:'快捷支付5倍积分',
+							desc:'微信、支付宝、京东支付等',
 							type:'查看详情',
-							url:'./detail.html?img=./src/link/yc5.jpg'
+							url:'https://mp.weixin.qq.com/s?__biz=MjM5MDcxNzI3NA==&mid=100006387&idx=1&sn=588510055648aa4ae2d482c9490cfc6b&chksm=2641ddc6113654d02ce3c630a4a202ebbf70febb3842b07dadd75509b9ca49613c991df6d977&mpshare=1&scene=1&srcid=0214rwk9ExkINuhdAAqQ8axX#rd'
+						},
+						{
+							id:2,
+							img:'./src/zhong2.jpg',
+							title:'优惠购神州专车电子券',
+							desc:'20元购50元乘车券',
+							type:'查看详情',
+							url:'https://mp.weixin.qq.com/s?__biz=MjM5MDcxNzI3NA==&mid=100006332&idx=2&sn=b61558ae71670d7eea8f7dfc5b0ad28f&chksm=2641dd891136549f295d48428b658c3a6b96236a0481d022b71608a0adb131b89d55896b153c&mpshare=1&scene=1&srcid=0214PGIwjdp6hBX7SEAZiiYX#rd'
+						},
+						{
+							id:3,
+							img:'./src/zhong3.jpg',
+							title:'1元抢30元话费',
+							desc:'手机银行信用卡新户专享',
+							type:'立即抢购',
+							url:'https://mp.weixin.qq.com/s?__biz=MjM5MDcxNzI3NA==&mid=100004987&idx=1&sn=b6721cfc9134f86383da8ee9f9f92c71&chksm=2641d04e11365958f2b419620cc038b4f004a3e9b89e2cf6a96731ba8200b061f6a5b9474f45&mpshare=1&scene=1&srcid=0214gC5J04AO2GWkBMFSrQtl#rd'
+						},
+						{
+							id:4,
+							img:'./src/zhong4.jpg',
+							title:'每周二三五抢优惠券',
+							desc:'手机银行App上午十点开抢',
+							type:'立即领取',
+							url:'https://mp.weixin.qq.com/s?__biz=MjM5MDcxNzI3NA==&mid=100004987&idx=2&sn=0425aa00c202251217da4442a705403e&chksm=2641d04e11365958c5f35fa75116a17b2f8b92f14cdb5a2a401424f9fbb0e3e63a9c9822dfb7&mpshare=1&scene=1&srcid=0214mcXDNgdo6JZix42BurOB#rd'
+						},
+						{
+							id:5,
+							img:'./src/zhong5.jpg',
+							title:'网易严选5折购',
+							desc:'最高立减15元',
+							type:'查看详情',
+							url:'https://mp.weixin.qq.com/s?__biz=MjM5MDcxNzI3NA==&mid=100006125&idx=2&sn=d6d6066efa256b8e0691fd16821edb9e&chksm=2641dcd8113655ce7aa26e383c49692a26c06a35887c6edec9ef9a24cd1cc669838fbf031248&mpshare=1&scene=1&srcid=0214DRQqFhmcDRR8ZFmnJVfS#rd'
+						},
+						{
+							id:6,
+							img:'./src/zhong5.jpg',
+							title:'网易严选5折购',
+							desc:'最高立减15元',
+							type:'查看详情',
+							url:'https://mp.weixin.qq.com/s?__biz=MjM5MDcxNzI3NA==&mid=100006125&idx=2&sn=d6d6066efa256b8e0691fd16821edb9e&chksm=2641dcd8113655ce7aa26e383c49692a26c06a35887c6edec9ef9a24cd1cc669838fbf031248&mpshare=1&scene=1&srcid=0214DRQqFhmcDRR8ZFmnJVfS#rd'
+						}
+					],
+					'民生银行':[
+						{
+							id:1,
+							img:'./src/ms1.jpg',
+							title:'购电影票满50元立减25元',
+							desc:'民生信用卡专享',
+							type:'立即申请',
+							url:'https://creditcard.cmbc.com.cn/active/web/wonderful/active/movie/index.html'
+						},
+						{
+							id:2,
+							img:'./src/ms2.jpg',
+							title:'餐饮美食最高减100元',
+							desc:'新用户乐享55元优惠券',
+							type:'立即申请',
+							url:'https://creditcard.cmbc.com.cn/active/web/wonderful/active/cdcPC/index.html'
+						},
+						{
+							id:3,
+							img:'./src/ms3.jpg',
+							title:'美食消费返现高达100美元',
+							desc:'消费即享20%返现',
+							type:'立即申请',
+							url:'https://creditcard.cmbc.com.cn/home/cn/web/wonderful/active/abroad/20190124/6654952.shtml'
+						},
+						{
+							id:4,
+							img:'./src/ms4.jpg',
+							title:'赫兹租车最低租7付4',
+							desc:'民生Visa信用卡专享',
+							type:'立即申请',
+							url:'https://creditcard.cmbc.com.cn/home/cn/web/wonderful/active/abroad/20190130/6751587.shtml'
+						},
+						{
+							id:5,
+							img:'./src/ms5.jpg',
+							title:'1元尊享机场CIP礼遇',
+							desc:'全国60余家机场尊享',
+							type:'立即申请',
+							url:'https://creditcard.cmbc.com.cn/home/cn/web/wonderful/active/country/20190111/6447797.shtml'
+						},
+						{
+							id:6,
+							img:'./src/ms5.jpg',
+							title:'1元尊享机场CIP礼遇',
+							desc:'全国60余家机场尊享',
+							type:'立即申请',
+							url:'https://creditcard.cmbc.com.cn/home/cn/web/wonderful/active/country/20190111/6447797.shtml'
+						}
+					],
+					'兴业银行':[
+						{
+							id:1,
+							img:'./src/xy1.jpg',
+							title:'小积分抽大奖',
+							desc:'戴森净化扇、华为手机等你拿',
+							type:'立即申请',
+							url:'http://creditcard.cib.com.cn/promotion/national/20181010.html'
+						},
+						{
+							id:2,
+							img:'./src/xy2.jpg',
+							title:'欧洲26国申根签证代办',
+							desc:'服务费低至199元',
+							type:'立即申请',
+							url:'http://creditcard.cib.com.cn/promotion/overseas/sales/20181228.html'
+						},
+						{
+							id:3,
+							img:'./src/xy3.jpg',
+							title:'境外消费笔笔返现1%',
+							desc:'返现上限高达200美元',
+							type:'立即申请',
+							url:'http://creditcard.cib.com.cn/apply/products/ZTseries/yxbjk.html'
+						},
+						{
+							id:4,
+							img:'./src/xy4.jpg',
+							title:'新户办卡送便利蜂礼品卡',
+							desc:'满18立减8元',
+							type:'立即申请',
+							url:'http://creditcard.cib.com.cn/promotion/national/20180530.html'
+						},
+						{
+							id:5,
+							img:'./src/xy5.jpg',
+							title:'清明上河图主题金卡',
+							desc:'航意险保额高达200万',
+							type:'立即申请',
+							url:'http://creditcard.cib.com.cn/apply/products/ZTseries/YSseries/ysk_qmsht.html'
+						},
+						{
+							id:6,
+							img:'./src/xy5.jpg',
+							title:'清明上河图主题金卡',
+							desc:'航意险保额高达200万',
+							type:'立即申请',
+							url:'http://creditcard.cib.com.cn/apply/products/ZTseries/YSseries/ysk_qmsht.html'
+						}
+					],
+					'平安银行':[
+						{
+							id:1,
+							img:'./src/pa1.jpg',
+							title:'砸金蛋享好礼',
+							desc:'话费免单 手机免费领',
+							type:'立即申请',
+							url:'https://b.pingan.com.cn/pacard/cordwood/activity/11so1f1d3ev00'
+						},
+						{
+							id:2,
+							img:'./src/pa2.jpg',
+							title:'在线支付 美食低至5折',
+							desc:'平安口袋银行APP',
+							type:'立即申请',
+							url:'https://b.pingan.com.cn/creditcard/huodong/pc/downapp/index.shtml'
+						},
+						{
+							id:3,
+							img:'./src/pa3.jpg',
+							title:'积分兑超值好礼',
+							desc:'享美食饮品 看超级大片',
+							type:'立即申请',
+							url:'http://www.wanlitong.com/hd/zone/index.jsp?zid=100300&WT.mc_id=0011080E0B112301'
+						},
+						{
+							id:4,
+							img:'./src/pa4.jpg',
+							title:'一键领取188元大礼包',
+							desc:'口袋商城首单满29减10',
+							type:'立即申请',
+							url:'https://b.pingan.com.cn/mall/mobile/newbornzone?innerid=KDAPP-XYKSY-GNQ&from=singlemessage&isappinstalled=0'
+						},
+						{
+							id:5,
+							img:'./src/pa5.jpg',
+							title:'平安信用卡88折加油',
+							desc:'全年最高返现720',
+							type:'立即申请',
+							url:'https://mp.weixin.qq.com/s/H8AEGOKHIRzncGj3pbRVaw'
+						},
+						{
+							id:6,
+							img:'./src/pa5.jpg',
+							title:'平安信用卡88折加油',
+							desc:'全年最高返现720',
+							type:'立即申请',
+							url:'https://mp.weixin.qq.com/s/H8AEGOKHIRzncGj3pbRVaw'
 						}
 					]
 				},
 				newslist:[
 					{
 						id:1,
-						title:'12306购票低至五折，马上出发！',
-						img:'./src/news2.png',
-						url:'./detail.html?img=./src/link/detail5.jpg'
+						title:'两岸三地故宫卡，齐赠开年好礼！',
+						img:'./src/link/news/news1.jpg',
+						url:'https://ccc.spdb.com.cn/miniSite/1655/ef14c9d/'
 					},
 					{
 						id:2,
-						title:'推荐亲友办卡，最高可领500元天猫购物券，时间有限，速度扩散吧~',
-						img:'./src/news1.png',
-						url:'./detail.html?img=./src/link/detail6.jpg'
+						title:'中行美好生活家庭卡温馨上市，阖家共享美好权益！',
+						img:'./src/link/news/news2.jpg',
+						url:'https://mp.weixin.qq.com/s?__biz=MjM5MDcxNzI3NA==&mid=2247490111&idx=1&sn=516a2b998c117a77c8a380dcc043545c&chksm=a641de0a9136571cf9a8294d3a04a7a9e9cacca28557380e619efc9b3c8d8c58d5e345be6c5d&mpshare=1&scene=1&srcid=02213kJNpkRLAxARSdauo9ON#rd'
 					}
 				]
 			},
