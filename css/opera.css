@@ -1,0 +1,30 @@
+/* 底部操作 */
+.flexwrap{
+	display: flex;
+	display: -webkit-flex;
+}
+.z_opera{
+	height:1.2rem;
+	position:fixed;
+	bottom:0;
+	text-align: center;
+	width:100%;
+	line-height: 1.2rem;
+}
+.z_house{
+	background-color: #333333;
+	width:2.1rem;
+}
+.z_houseimg{
+	width:0.7rem;
+	height:0.6rem;
+	display: inline-block;
+	vertical-align: middle;
+}
+.z_btn{
+	flex-grow: 1;
+	background-color: #222222;
+	font-size: 0.4rem;
+	font-weight: bold;
+	color:white;
+}

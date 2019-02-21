@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>光大淘票票联名卡</title>
+		<style>
+			*{margin:0;padding:0}
+			body{
+				font-size: 0.32rem;
+			}
+			.wrap{
+				padding-bottom: 1.2rem;
+				position:relative;
+			}
+			.bg{
+				display: block;
+				width:100%;
+			}
+			.click{
+				height:0.45rem;
+				width:1.57rem;
+				border-radius: 0.16rem;
+				border:0.02rem solid;
+				color:#dd6f56;
+				font-size: 0.22rem;
+				text-align: center;
+				line-height: 0.45rem;
+				position:absolute;
+				bottom:2.8rem;
+				left:50%;
+				transform: translateX(-50%);
+				-webkit-transform: translateX(-50%);
+			}
+		</style>
+		<link rel="stylesheet" type="text/css" href="../css/opera.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/mask.css"/>
+		<script src="../js/rem.js"></script>
+	</head>
+	<body>
+		<div class="wrap">
+			<img src="../src/link/banner/tpp.png" class="bg">
+			<div class="click" id="rule">点击查看详情</div>
+		</div>
+		<div class="flexwrap z_opera">
+			<a href="../index.html" class="z_house">
+				<img src="../src/link/house.png" class="z_houseimg" />
+			</a>
+			<div class="z_btn">立即申请</div>
+		</div>
+		<div id="z_mask">
+			<div class="z_content">
+				<div class="z_wrap">
+					<img class="z_introimg" src="../src/link/banner/tpp_det.png" >
+				</div>
+			</div>
+			<div id="z_close"></div>
+		</div>
+	</body>
+	<script src="../js/maskopera.js"></script>
+</html>
