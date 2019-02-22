@@ -117,7 +117,7 @@ a{
 	top:0.2rem;
 }
 .bargaintitle{
-	font-size: 0.26rem;
+	font-size: 0.28rem;
 	color:#3a3a3a;
 	font-weight: bold;
 	text-indent: 0.14rem;
@@ -221,8 +221,8 @@ a{
 	overflow: hidden;
 }
 .wutitle{
-	font-size: 15px;
-	color:black;
+	font-size: 14px;
+	color:#222222;
 }
 .wudesc{
 	font-size: 11px;
@@ -248,8 +248,8 @@ a{
 	height:2rem;
 }
 .newstitle{
-	font-size: 0.3rem;
-	color:black;
+	font-size: 0.28rem;
+	color:#222222;
 	font-weight: bold;
 	word-break: break-all;
 	margin-bottom: 0.24rem;
