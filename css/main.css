@@ -237,8 +237,8 @@ a{
 }
 .newlist{
 	display: block;
-	padding:0 0 0.48rem;
-	margin:0 0.27rem 0.48rem;
+	padding:0 0 0.15rem;
+	margin:0 0.27rem 0.15rem;
 	box-sizing: border-box;
 	border-bottom: 0.01rem solid #f2f4f6;
 }
