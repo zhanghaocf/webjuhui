@@ -33,25 +33,6 @@
 				display: block;
 				width:100%;
 			}
-			.head{
-				width:2.5rem;
-				height:2.5rem;
-				border-radius: 50%;
-				background-color: white;
-				margin:-1.25rem auto 0.32rem;
-				position:relative;
-			}
-			.head img{
-				width:2.15rem;
-				height:2.15rem;
-				border-radius: 50%;
-				display: block;
-				position:absolute;
-				left:50%;
-				top:50%;
-				transform: translate(-50%,-50%);
-				-webkit-transform: translate(-50%,-50%);
-			}
 			.wrap{
 				box-sizing: border-box;
 				padding:0 0.3rem;
@@ -108,10 +89,7 @@
 	</head>
 	<body>
 		<div id="app">
-			<img :src="bgimg" class="bg" />
-			<div class="head">
-				<img :src="headimg"/>
-			</div>
+			<img :src="headimg" class="bg" />
 			<div class="wrap">
 				<a :href="item.url" class="list" v-for="item in list" :key="item.id">
 					<img :src="item.img" class="l_img" />
@@ -130,40 +108,39 @@
 		var type=location.search.split("=")[1];	
 		var brand={
 			'starbucks':{
-				bgimg:'../src/link/brand/b_bg.png',
-				headimg:'../src/link/brand/b_head.png',
+				headimg:'../src/link/brand/starbucks.jpg',
 				list:[
 					{
 						id:1,
-						img:'../src/link/brand/b_1.png',
+						img:'../src/link/brand/zx.png',
 						title:'9积分兑星巴克大杯咖啡',
 						name:'中信银行信用卡',
 						url:'https://creditcard.ecitic.com/youhui/120926/index.shtml'
 					},
 					{
 						id:2,
-						img:'../src/link/brand/b_2.png',
+						img:'../src/link/brand/zs.png',
 						title:'8元星巴克抵扣券限时抢兑',
 						name:'招商银行信用卡',
 						url:'###'
 					},
 					{
 						id:3,
-						img:'../src/link/brand/b_3.png',
+						img:'../src/link/brand/zg.png',
 						title:'15000积分兑换大杯饮品',
 						name:'中国银行信用卡',
 						url:'###'
 					},
 					{
 						id:4,
-						img:'../src/link/brand/b_4.png',
+						img:'../src/link/brand/pa.png',
 						title:'17500积分兑换大杯饮品',
 						name:'平安银行信用卡',
 						url:'http://www.wanlitong.com/hd/zone/index.jsp?zid=100300&WT.mc_id=0011080E0B112301'
 					},
 					{
 						id:5,
-						img:'../src/link/brand/b_5.png',
+						img:'../src/link/brand/pf.png',
 						title:'17500积分兑换大杯饮品',
 						name:'浦发银行信用卡',
 						url:'http://ccc.spdb.com.cn/miniSite/538/xbk.shtml'
@@ -171,166 +148,120 @@
 				]
 			},
 			'w':{
-				bgimg:'../src/link/brand/b_bg.png',
-				headimg:'../src/link/brand/b_head.png',
+				headimg:'../src/link/brand/w.jpg',
 				list:[
 					{
 						id:1,
-						img:'../src/link/brand/b_1.png',
-						title:'9积分兑星巴克大杯咖啡w',
-						name:'中信银行信用卡',
+						img:'../src/link/brand/pf.png',
+						title:'90元购100元屈臣氏代金券',
+						name:'浦发银行信用卡',
 						url:'https://creditcard.ecitic.com/youhui/120926/index.shtml'
 					},
 					{
 						id:2,
-						img:'../src/link/brand/b_2.png',
-						title:'8元星巴克抵扣券限时抢兑w',
-						name:'招商银行信用卡',
+						img:'../src/link/brand/zs.png',
+						title:'6积分兑30元屈臣氏代金券',
+						name:'兴业银行信用卡',
 						url:'###'
-					},
-					{
-						id:3,
-						img:'../src/link/brand/b_3.png',
-						title:'15000积分兑换大杯饮品w',
-						name:'中国银行信用卡',
-						url:'###'
-					},
-					{
-						id:4,
-						img:'../src/link/brand/b_4.png',
-						title:'17500积分兑换大杯饮品w',
-						name:'平安银行信用卡',
-						url:'http://www.wanlitong.com/hd/zone/index.jsp?zid=100300&WT.mc_id=0011080E0B112301'
-					},
-					{
-						id:5,
-						img:'../src/link/brand/b_5.png',
-						title:'17500积分兑换大杯饮品w',
-						name:'浦发银行信用卡',
-						url:'http://ccc.spdb.com.cn/miniSite/538/xbk.shtml'
 					}
 				]
 			},
-			'kfc':{
-				bgimg:'../src/link/brand/b_bg.png',
-				headimg:'../src/link/brand/b_head.png',
+			'burger':{
+				headimg:'../src/link/brand/burger.jpg',
 				list:[
 					{
 						id:1,
-						img:'../src/link/brand/b_1.png',
-						title:'9积分兑星巴克大杯咖啡kfc',
-						name:'中信银行信用卡',
+						img:'../src/link/brand/zg.png',
+						title:'10元购35元汉堡王',
+						name:'中国银行信用卡',
 						url:'https://creditcard.ecitic.com/youhui/120926/index.shtml'
 					},
 					{
 						id:2,
-						img:'../src/link/brand/b_2.png',
-						title:'8元星巴克抵扣券限时抢兑kfc',
-						name:'招商银行信用卡',
+						img:'../src/link/brand/pa.png',
+						title:'周三购15元代30元',
+						name:'平安银行信用卡',
 						url:'###'
 					},
 					{
 						id:3,
-						img:'../src/link/brand/b_3.png',
-						title:'15000积分兑换大杯饮品kfc',
-						name:'中国银行信用卡',
+						img:'../src/link/brand/xy.png',
+						title:'6积分兑一份皇堡套餐',
+						name:'兴业银行信用卡',
 						url:'###'
 					},
 					{
 						id:4,
-						img:'../src/link/brand/b_4.png',
-						title:'17500积分兑换大杯饮品kfc',
-						name:'平安银行信用卡',
-						url:'http://www.wanlitong.com/hd/zone/index.jsp?zid=100300&WT.mc_id=0011080E0B112301'
-					},
-					{
-						id:5,
-						img:'../src/link/brand/b_5.png',
-						title:'17500积分兑换大杯饮品kfc',
+						img:'../src/link/brand/pf.png',
+						title:'40元购50元汉堡王代金券',
 						name:'浦发银行信用卡',
-						url:'http://ccc.spdb.com.cn/miniSite/538/xbk.shtml'
+						url:'http://www.wanlitong.com/hd/zone/index.jsp?zid=100300&WT.mc_id=0011080E0B112301'
 					}
 				]
 			},
 			'pizzahut':{
-				bgimg:'../src/link/brand/b_bg.png',
-				headimg:'../src/link/brand/b_head.png',
+				headimg:'../src/link/brand/pizzahut.jpg',
 				list:[
 					{
 						id:1,
-						img:'../src/link/brand/b_1.png',
-						title:'9积分兑星巴克大杯咖啡pizzahut',
+						img:'../src/link/brand/zx.png',
+						title:'9积分兑30元代金券',
 						name:'中信银行信用卡',
 						url:'https://creditcard.ecitic.com/youhui/120926/index.shtml'
 					},
 					{
 						id:2,
-						img:'../src/link/brand/b_2.png',
-						title:'8元星巴克抵扣券限时抢兑pizzahut',
-						name:'招商银行信用卡',
-						url:'###'
-					},
-					{
-						id:3,
-						img:'../src/link/brand/b_3.png',
-						title:'15000积分兑换大杯饮品pizzahut',
+						img:'../src/link/brand/zg.png',
+						title:'16337积分兑30元代金券',
 						name:'中国银行信用卡',
 						url:'###'
 					},
 					{
-						id:4,
-						img:'../src/link/brand/b_4.png',
-						title:'17500积分兑换大杯饮品pizzahut',
-						name:'平安银行信用卡',
-						url:'http://www.wanlitong.com/hd/zone/index.jsp?zid=100300&WT.mc_id=0011080E0B112301'
+						id:3,
+						img:'../src/link/brand/pf.png',
+						title:'39600积分兑30元代金券',
+						name:'浦发银行信用卡',
+						url:'###'
 					},
 					{
-						id:5,
-						img:'../src/link/brand/b_5.png',
-						title:'17500积分兑换大杯饮品pizzahut',
-						name:'浦发银行信用卡',
-						url:'http://ccc.spdb.com.cn/miniSite/538/xbk.shtml'
+						id:4,
+						img:'../src/link/brand/xy.png',
+						title:'6积分兑30元代金券',
+						name:'兴业银行信用卡',
+						url:'http://www.wanlitong.com/hd/zone/index.jsp?zid=100300&WT.mc_id=0011080E0B112301'
 					}
 				]
 			},
 			'haagendars':{
-				bgimg:'../src/link/brand/b_bg.png',
-				headimg:'../src/link/brand/b_head.png',
+				headimg:'../src/link/brand/haagendars.jpg',
 				list:[
 					{
 						id:1,
-						img:'../src/link/brand/b_1.png',
-						title:'9积分兑星巴克大杯咖啡haagendars',
+						img:'../src/link/brand/zx.png',
+						title:'9积分兑小纸杯单球',
 						name:'中信银行信用卡',
 						url:'https://creditcard.ecitic.com/youhui/120926/index.shtml'
 					},
 					{
 						id:2,
-						img:'../src/link/brand/b_2.png',
-						title:'8元星巴克抵扣券限时抢兑haagendars',
-						name:'招商银行信用卡',
-						url:'###'
-					},
-					{
-						id:3,
-						img:'../src/link/brand/b_3.png',
-						title:'15000积分兑换大杯饮品haagendars',
+						img:'../src/link/brand/zg.png',
+						title:'15768积分兑单球代金券',
 						name:'中国银行信用卡',
 						url:'###'
 					},
 					{
-						id:4,
-						img:'../src/link/brand/b_4.png',
-						title:'17500积分兑换大杯饮品haagendars',
-						name:'平安银行信用卡',
-						url:'http://www.wanlitong.com/hd/zone/index.jsp?zid=100300&WT.mc_id=0011080E0B112301'
+						id:3,
+						img:'../src/link/brand/pf.png',
+						title:'40元购50元哈根达斯代金券',
+						name:'浦发银行信用卡',
+						url:'###'
 					},
 					{
-						id:5,
-						img:'../src/link/brand/b_5.png',
-						title:'17500积分兑换大杯饮品haagendars',
-						name:'浦发银行信用卡',
-						url:'http://ccc.spdb.com.cn/miniSite/538/xbk.shtml'
+						id:4,
+						img:'../src/link/brand/xy.png',
+						title:'6积分兑1份单球冰淇淋或小纸杯或脆皮条',
+						name:'兴业银行信用卡',
+						url:'http://www.wanlitong.com/hd/zone/index.jsp?zid=100300&WT.mc_id=0011080E0B112301'
 					}
 				]
 			}

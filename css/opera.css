@@ -1,3 +1,7 @@
+a{
+	text-decoration: none;
+	-webkit-tap-highlight-color: transparent;
+}
 /* 底部操作 */
 .flexwrap{
 	display: flex;
