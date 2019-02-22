@@ -1,0 +1,71 @@
+/* mask */
+#z_mask{
+	position:fixed;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+	background-color: rgba(0,0,0,0.6);
+	display: none;
+}
+#z_close{
+	width:0.7rem;
+	height:0.7rem;
+	border:0.03rem solid #ffffff;
+	border-radius: 50%;
+	position:absolute;
+	box-sizing: border-box;
+	left:50%;
+	bottom:28px;
+	transform: translateX(-50%) rotate(45deg);
+	-webkit-transform: translateX(-50%) rotate(45deg);
+}
+#z_close:before,#z_close:after{
+	display: block;
+	content:'';
+	width:60%;
+	height:0.05rem;
+	background-color: #ffffff;
+	position:absolute;
+	left:50%;
+	top:50%;
+	border-radius: 0.025rem;
+	transform: translate(-50%,-50%);
+	-webkit-transform: translate(-50%,-50%);
+}
+#z_close:after{
+	width:0.05rem;
+	height:60%;
+}
+.z_content{
+	overflow-x: hidden;
+	width:5.08rem;
+	height:60%;
+	background-color: white;
+	border-radius: 0.4rem;
+	box-sizing: border-box;
+	position:absolute;
+	left:50%;
+	top:50%;
+	transform: translate(-50%,-50%);
+	-webkit-transform: translate(-50%,-50%);
+	padding: 0.5rem 0;
+}
+.z_wrap{
+	height:100%;
+	width:100%;
+	overflow: hidden;
+	overflow-y: auto;
+}
+/* .content:after{
+	display: block;
+	content:'';
+	width:100%;
+	height:0.4rem;
+	background-color: white;
+	position:absolute;
+	bottom:0;
+} */
+.z_introimg{
+	width:100%;
+}

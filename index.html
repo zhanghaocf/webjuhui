@@ -8,6 +8,7 @@
 		<link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
 		<link rel="stylesheet" type="text/css" href="css/main.css"/>
 		<link rel="stylesheet" type="text/css" href="css/weuimodify.css"/>
+		<script src="js/rem.js"></script>
 	</head>
 	<body>
 		<div id="app" v-cloak>
@@ -33,11 +34,11 @@
 				<div class="text">品牌活动</div>
 				<div class="onlineswiper">
 					<div class="swiper-wrapper">
-						<div class="swiper-slide onlineslide" v-for="item in onlinelist" :key="item.id">
+						<a :href="item.url" class="swiper-slide onlineslide" v-for="item in onlinelist" :key="item.id">
 							<img src="src/hot.png" class="hot" v-if="item.ishot" />
 							<img class="onlineimg" :src="item.img">
 							<div v-text="item.text"></div>
-						</div>
+						</a>
 					</div>
 				</div>
 				<div v-if="onlinelist.length===0" style="text-align: center;">
@@ -111,34 +112,6 @@
 	<script src="js/vue.min.js"></script>
 	<script src="js/swiper.min.js"></script>
 	<script src="js/axios.min.js"></script>
-	<script>
-		function setHtmlFoot(){
-			var win=document.documentElement||document.getElementsByTagName("html")[0];
-			var winWidth=win.offsetWidth;
-			var footsize=100*winWidth/750;
-			win.style.fontSize=footsize+"px";
-		}
-		window.onpageshow=function(){
-			setHtmlFoot();
-		}
-		setHtmlFoot();
-		//截流
-		function debounce(fn,time){
-			var timer=null;
-			return function(){
-				clearTimeout(timer);
-				var args=arguments;
-				timer=setTimeout(function(){
-					fn.apply(null,args);
-					
-				},time)
-			}
-		}
-		var setsize=debounce(setHtmlFoot,300);
-		window.onresize=function(){
-			setsize();
-		}
-	</script>
 	</script>
 	<script>
 		var vm=new Vue({

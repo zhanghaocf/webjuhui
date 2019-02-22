@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>品牌活动</title>
+		<script src="../js/rem.js"></script>
+		<style>
+			*{
+				margin:0;
+				padding:0;
+				-webkit-user-select: none;
+				user-select: none;
+			}
+			html,body{
+				height:100%;
+			}
+			body{
+				background-color: white;
+			}
+			a{
+				text-decoration: none;
+				-webkit-tap-highlight-color: transparent;
+			}
+			#app{
+				overflow-x: hidden;
+				font-size: 0.32rem;
+			}
+			[v-cloak]{
+				display: none;
+			}
+			.bg{
+				display: block;
+				width:100%;
+			}
+			.head{
+				width:2.5rem;
+				height:2.5rem;
+				border-radius: 50%;
+				background-color: white;
+				margin:-1.25rem auto 0.32rem;
+				position:relative;
+			}
+			.head img{
+				width:2.15rem;
+				height:2.15rem;
+				border-radius: 50%;
+				display: block;
+				position:absolute;
+				left:50%;
+				top:50%;
+				transform: translate(-50%,-50%);
+				-webkit-transform: translate(-50%,-50%);
+			}
+			.wrap{
+				box-sizing: border-box;
+				padding:0 0.3rem;
+			}
+			.list{
+				display: flex;
+				display: -webkit-flex;
+				justify-content: space-between;
+				align-items: center;
+				height:1.5rem;
+				box-sizing: border-box;
+				border:0.05rem solid #f4f5f7;
+				border-radius: 0.1rem;
+				background-color: white;
+				margin-bottom: 0.32rem;
+			}
+			.l_img{
+				width: 1rem;
+				margin-left: 0.36rem;
+				flex-shrink: 0;
+			}
+			.l_right{
+				width:0.24rem;
+				height:0.38rem;
+				margin-right: 0.3rem;
+				flex-shrink: 0;
+			}
+			.middle{
+				overflow: hidden;
+				flex-grow: 1;
+				font-size: 0.24rem;
+				color:#8e8e8e;
+				height:1.07rem;
+				border-left: 0.02rem solid #f7f8f9;
+				margin-left: 0.28rem;
+				box-sizing: border-box;
+				padding:0 0.37rem;
+				display: flex;
+				display: -webkit-flex;
+				flex-wrap: wrap;
+				align-content: center;
+			}
+			.l_title{
+				font-size: 0.28rem;
+				color:#222222;
+				width:100%;
+			}
+			.oneline{
+			  overflow: hidden;
+			  text-overflow: ellipsis;
+			  white-space: nowrap;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="app">
+			<img :src="bgimg" class="bg" />
+			<div class="head">
+				<img :src="headimg"/>
+			</div>
+			<div class="wrap">
+				<a :href="item.url" class="list" v-for="item in list" :key="item.id">
+					<img :src="item.img" class="l_img" />
+					<div class="middle">
+						<p class="l_title oneline">{{item.title}}</p>
+						<p class="oneline">{{item.name}}</p>
+					</div>
+					<img src="../src/link/brand/b_right.png" class="l_right" />
+				</a>
+			</div>
+		</div>
+	</body>
+	<script src="../js/vue.min.js"></script>
+	<script>
+		var vm=new Vue({
+			el:"#app",
+			data:{
+				bgimg:'../src/link/brand/b_bg.png',
+				headimg:'../src/link/brand/b_head.png',
+				list:[
+					{
+						id:1,
+						img:'../src/link/brand/b_1.png',
+						title:'9积分兑星巴克大杯咖啡',
+						name:'中信银行信用卡',
+						url:'https://creditcard.ecitic.com/youhui/120926/index.shtml'
+					},
+					{
+						id:2,
+						img:'../src/link/brand/b_2.png',
+						title:'8元星巴克抵扣券限时抢兑',
+						name:'招商银行信用卡',
+						url:'###'
+					},
+					{
+						id:3,
+						img:'../src/link/brand/b_3.png',
+						title:'15000积分兑换大杯饮品',
+						name:'中国银行信用卡',
+						url:'###'
+					},
+					{
+						id:4,
+						img:'../src/link/brand/b_4.png',
+						title:'17500积分兑换大杯饮品',
+						name:'平安银行信用卡',
+						url:'http://www.wanlitong.com/hd/zone/index.jsp?zid=100300&WT.mc_id=0011080E0B112301'
+					},
+					{
+						id:5,
+						img:'../src/link/brand/b_5.png',
+						title:'17500积分兑换大杯饮品',
+						name:'浦发银行信用卡',
+						url:'http://ccc.spdb.com.cn/miniSite/538/xbk.shtml'
+					}
+				]
+			}
+		})
+	</script>
+</html>

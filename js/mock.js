@@ -3,45 +3,55 @@ data:{
 	list: [
 		{
 			id:1,
-			img:"./src/banner.png",
-			url:'./detail.html?img=./src/link/detail1.jpg'
+			img:"./src/banner1.jpg",
+			url:'./detail/banner1.html'
 		},
 		{
 			id:2,
-			img:"./src/banner.png",
-			url:'./detail.html?img=./src/link/detail1.jpg'
-		}					
+			img:"./src/banner2.jpg",
+			url:'./detail/banner2.html'
+		},
+		{
+			id:3,
+			img:"./src/banner3.jpg",
+			url:'./detail/banner3.html'
+		}		
 	],
 	onlinelist:[
 		{
 			id:1,
 			img: "./src/online1.jpg",
 			text:'饮品随机减',
-			ishot:true
+			ishot:true,
+			url:'./detail/brand_d.html'
 		},
 		{
 			id: 2,
 			img: "./src/online2.jpg",
 			text: '5元抵扣券',
-			ishot:false
+			ishot:false,
+			url:'###'
 		},
 		{
 			id: 3,
 			img: "./src/online3.jpg",
 			text: '领半价饭票',
-			ishot:false
+			ishot:false,
+			url:'###'
 		},
 		{
 			id: 4,
 			img: "./src/online4.jpg",
 			text: '周三享5折',
-			ishot:false
+			ishot:false,
+			url:'###'
 		},
 		{
 			id: 5,
 			img: "./src/online5.jpg",
 			text: '折扣券放送',
-			ishot:false
+			ishot:false,
+			url:'###'
 		}
 	],
 	tehui:[
