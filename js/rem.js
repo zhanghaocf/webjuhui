@@ -16,7 +16,6 @@ function debounce(fn,time){
 		var args=arguments;
 		timer=setTimeout(function(){
 			fn.apply(null,args);
-			
 		},time)
 	}
 }
