@@ -1,4 +1,7 @@
 /* mask */
+html,body{
+	height:100%;
+}
 #z_mask{
 	position:fixed;
 	top:0;
@@ -56,6 +59,7 @@
 	width:100%;
 	overflow: hidden;
 	overflow-y: auto;
+	-webkit-overflow-scrolling: touch;
 }
 /* .content:after{
 	display: block;

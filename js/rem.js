@@ -5,7 +5,10 @@ function setHtmlFoot(){
 	win.style.fontSize=footsize+"px";
 }
 window.onpageshow=function(){
-	setHtmlFoot();
+	//加延时解决ios6p以上机型点到外部在返回回来页面布局乱掉就是rem失效问题
+	setTimeout(function(){
+		setHtmlFoot();
+	},10)
 }
 setHtmlFoot();
 //截流

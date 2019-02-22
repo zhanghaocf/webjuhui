@@ -8,4 +8,12 @@ window.onload=function(){
 	close.addEventListener('touchstart',function(){
 		mask.style.display="none";
 	},false)
+	mask.addEventListener('touchmove',function(e){
+		var e=e||window.event;
+		e.preventDefault();
+	},false)
+	document.querySelector('.z_wrap').addEventListener('touchmove',function(e){
+		var e=e||window.event;
+		e.cancelBubble=true;
+	},false)
 }
