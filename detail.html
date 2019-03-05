@@ -11,8 +11,10 @@
 				user-select: none;
 			}
 				
-			#detail{
-				width:100%;
+			#ifm{
+				border:none;
+				box-sizing: border-box;
+				display: block;
 			}
 		</style>
 	</head>
@@ -20,8 +22,11 @@
 		<iframe src="" id="ifm"></iframe>
 	</body>
 	<script>
-		var search=location.search.split("?")[1];
-		var imgurl=search.split("=")[1];
-		document.getElementById('ifm').src=imgurl;
+		var url=location.search.split("=")[1];
+		var ifm=document.getElementById('ifm');
+		ifm.width=window.screen.availWidth+"px";
+		ifm.height=window.screen.availHeight+"px";
+		ifm.src=unescape(url)
+
 	</script>
 </html>

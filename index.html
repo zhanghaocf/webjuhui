@@ -13,7 +13,7 @@
 			<div class="swiper-container bannerswiper borderbottomgray">
 				<div class="swiper-wrapper">
 					<div class="swiper-slide" v-for="item in bannerList" :key="item.id">
-						<a :href="/detail.html?url=item.url">
+						<a :href="'./detail.html?url='+item.url|handleurl">
 							<img class="slideimg" :src="item.img" />
 						</a>
 					</div>
@@ -35,7 +35,7 @@
 			</div>
 			<div class='bargain borderbottomgray'>
 				<div class='text'>超值特惠</div>
-				<a v-for="(item , index) in tehui" :class="'top'+(index+1)" :key="item.id" :href="item.url">
+				<a v-for="(item , index) in tehui" :class="'top'+(index+1)" :key="item.id" :href="'./detail.html?url='+item.url|handleurl">
 					<img class="bargainimg" :src='item.img' />
 				  	<div class='tag'>No.{{index+1}}</div>
 				  	<div v-if="!!item.title" class="bargaintitle oneline">{{item.title}}</div>
@@ -79,7 +79,7 @@
 			 </div>
 			<div class="news">
 				<div class='text'>热卡推荐</div>
-				<a class="newlist" v-for="item in newslist" :key="item.id" :href="item.url">
+				<a class="newlist" v-for="item in newslist" :key="item.id" :href="'./detail.html?url='+item.url|handleurl">
 					<div class="newstitle">{{item.title}}</div>
 					<img :src="item.img" class="newsimg" />
 				<a>
@@ -599,6 +599,17 @@
 						obj[item]=smallobj;
 					}
 					return obj;
+				}
+			},
+			filters:{
+				handleurl(url){
+					let arr=url.split("?");
+					let realurl=arr.shift();
+					let str=arr.join("?");
+					let brr=str.split("=");
+					let keyname=brr.shift();
+					let value=escape(brr.join("="));
+					return `${realurl}?${keyname}=${value}`
 				}
 			}
 		})
