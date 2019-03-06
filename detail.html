@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
 		<title>详情页</title>
 		<style type="text/css">
 			*{
@@ -12,21 +13,115 @@
 			}
 				
 			#ifm{
-				border:none;
 				box-sizing: border-box;
 				display: block;
 			}
+			.home{
+				width:50px;
+				height:50px;
+				position:fixed;
+				right:20px;
+				bottom:20px;
+				z-index: 1;
+			}
+		  .loader {
+			  position: relative;
+			  width: 2.5em;
+			  height: 2.5em;
+			  transform: rotate(165deg);
+			}
+			.loader:before, .loader:after {
+			  content: '';
+			  position: absolute;
+			  top: 50%;
+			  left: 50%;
+			  display: block;
+			  width: 0.5em;
+			  height: 0.5em;
+			  border-radius: 0.25em;
+			  transform: translate(-50%, -50%);
+			}
+			.loader:before {
+			  animation: before 2s infinite;
+			}
+			.loader:after {
+			  animation: after 2s infinite;
+			}
+			
+			@keyframes before {
+			  0% {
+			    width: 0.5em;
+			    box-shadow: 1em -0.5em rgba(225, 20, 98, 0.75), -1em 0.5em rgba(111, 202, 220, 0.75);
+			  }
+			  35% {
+			    width: 2.5em;
+			    box-shadow: 0 -0.5em rgba(225, 20, 98, 0.75), 0 0.5em rgba(111, 202, 220, 0.75);
+			  }
+			  70% {
+			    width: 0.5em;
+			    box-shadow: -1em -0.5em rgba(225, 20, 98, 0.75), 1em 0.5em rgba(111, 202, 220, 0.75);
+			  }
+			  100% {
+			    box-shadow: 1em -0.5em rgba(225, 20, 98, 0.75), -1em 0.5em rgba(111, 202, 220, 0.75);
+			  }
+			}
+			@keyframes after {
+			  0% {
+			    height: 0.5em;
+			    box-shadow: 0.5em 1em rgba(61, 184, 143, 0.75), -0.5em -1em rgba(233, 169, 32, 0.75);
+			  }
+			  35% {
+			    height: 2.5em;
+			    box-shadow: 0.5em 0 rgba(61, 184, 143, 0.75), -0.5em 0 rgba(233, 169, 32, 0.75);
+			  }
+			  70% {
+			    height: 0.5em;
+			    box-shadow: 0.5em -1em rgba(61, 184, 143, 0.75), -0.5em 1em rgba(233, 169, 32, 0.75);
+			  }
+			  100% {
+			    box-shadow: 0.5em 1em rgba(61, 184, 143, 0.75), -0.5em -1em rgba(233, 169, 32, 0.75);
+			  }
+			}
+			/**
+			 * Attempt to center the whole thing!
+			 */
+			html,
+			body {
+			  height: 100%;
+			}
+			
+			.loader {
+			  position: absolute;
+			  top: calc(50% - 1.25em);
+			  left: calc(50% - 1.25em);
+			}
 		</style>
+
 	</head>
 	<body>
-		<iframe src="" id="ifm"></iframe>
+		<div class="loader" id="loader"></div>
+		<div id="ifmwrap" style="overflow: auto;-webkit-overflow-scrolling:touch">
+			<iframe id="ifm" frameborder="0" height="100%" style="width: 1px; min-width: 100%; *width: 100%;"></iframe>
+		</div>
+		<a class="home" href="./index.html">
+			<img class="home" src="./src/home.png"/>
+		</a>
 	</body>
 	<script>
-		var url=location.search.split("=")[1];
+		var loader=document.getElementById("loader");
+		var arr=location.search.split("=");
+		arr.shift();
+		var url=arr.join("=");
 		var ifm=document.getElementById('ifm');
-		ifm.width=window.screen.availWidth+"px";
-		ifm.height=window.screen.availHeight+"px";
-		ifm.src=unescape(url)
-
+		var ifmwrap=document.getElementById('ifmwrap');
+		ifmwrap.style.width=window.screen.availWidth+"px";
+		ifmwrap.style.height=window.screen.availHeight+"px";
+		if (navigator.userAgent.match(/iPad|iPhone/i)) {
+		ifm.setAttribute('scrolling', 'no');
+		}
+		ifm.src=unescape(url);
+		ifm.onload=function(){
+			loader.style.display="none";
+		}
 	</script>
 </html>

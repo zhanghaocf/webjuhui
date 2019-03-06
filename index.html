@@ -57,7 +57,7 @@
 				<div class="reswiper swiper-container">
 					<div class="swiper-wrapper">
 						<div class="swiper-slide reslide swiper-no-swiping" v-for="(item,keyn) in compu_recommendObj[activerecom]" :key="keyn">
-							<a :href="wuitem.url" class="wupin" v-for="(wuitem,wuindex) in item" :key="wuitem.id">
+							<a :href="'./detail.html?url='+wuitem.url|handleurl" class="wupin" v-for="(wuitem,wuindex) in item" :key="wuitem.id">
 								<img :src="wuitem.img" class="wuimg" />
 								<div class="midwu">
 									<div class="wutitle oneline">{{wuitem.title}}</div>
@@ -608,7 +608,11 @@
 					let str=arr.join("?");
 					let brr=str.split("=");
 					let keyname=brr.shift();
-					let value=escape(brr.join("="));
+					let linkurl=brr.join("=");
+					if(linkurl.indexOf('ecentre.spdbccc.com.cn')>0){
+						return linkurl;
+					}
+					let value=escape(linkurl);
 					return `${realurl}?${keyname}=${value}`
 				}
 			}

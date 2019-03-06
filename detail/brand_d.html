@@ -98,7 +98,7 @@
 		<div id="app">
 			<img :src="headimg" class="bg" />
 			<div class="wrap">
-				<a :href="item.url" class="list" v-for="item in list" :key="item.id">
+				<a :href="'../detail.html?url='+item.url|handleurl" class="list" v-for="item in list" :key="item.id">
 					<img :src="item.img" class="l_img" />
 					<div class="middle">
 						<p class="l_title oneline">{{item.title}}</p>
@@ -280,7 +280,22 @@
 	<script>
 		var vm=new Vue({
 			el:"#app",
-			data:brand[type]
+			data:brand[type],
+			filters:{
+				handleurl(url){
+					let arr=url.split("?");
+					let realurl=arr.shift();
+					let str=arr.join("?");
+					let brr=str.split("=");
+					let keyname=brr.shift();
+					let linkurl=brr.join("=");
+					if(linkurl.indexOf('ecentre.spdbccc.com.cn')>0||linkurl.indexOf('xyk.cmbchina.com')>0){
+						return linkurl;
+					}
+					let value=escape(linkurl);
+					return `${realurl}?${keyname}=${value}`
+				}
+			}
 		})
 	</script>
 </html>
