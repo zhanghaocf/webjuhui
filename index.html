@@ -127,7 +127,7 @@
 					{
 						id:1,
 						img:"./src/banner1.png",
-						url:'https://ecentre.spdbccc.com.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
+						url:'https://rongmo.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
 					},
 					{
 						id:2,
@@ -208,7 +208,7 @@
 							title:'刷卡金返还&多倍积分',
 							desc:'\"小浦惠花\"指定商户专享',
 							type:'立即申请',
-							url:'https://ecentre.spdbccc.com.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
+							url:'https://rongmo.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
 						},
 						{
 							id:2,
@@ -216,7 +216,7 @@
 							title:'境外刷卡享50元酒店好礼',
 							desc:'单笔满200元即可使用',
 							type:'立即申请',
-							url:'https://ecentre.spdbccc.com.cn/creditcard/indexActivity.htm?data=ZF2780059&itemcode=0000000187'
+							url:'https://rongmo.zhgroot.cn/creditcard/indexActivity.htm?data=ZF2780059&itemcode=0000000187'
 						},
 						{
 							id:3,
@@ -224,7 +224,7 @@
 							title:'浦发惠军联名卡荣耀上市',
 							desc:'专属福利，月月有礼',
 							type:'立即申请',
-							url:'https://ecentre.spdbccc.com.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
+							url:'https://rongmo.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
 						},
 						{
 							id:4,
@@ -232,7 +232,7 @@
 							title:'猪小屁信用卡福气满满',
 							desc:'首刷礼、福袋大放送',
 							type:'立即申请',
-							url:'https://ecentre.spdbccc.com.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
+							url:'https://rongmo.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
 						},
 						{
 							id:5,
@@ -240,7 +240,7 @@
 							title:'首绑支付宝享满88减10',
 							desc:'每天上午八点起限量抢',
 							type:'立即申请',
-							url:'https://ecentre.spdbccc.com.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
+							url:'https://rongmo.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
 						},
 						{
 							id:6,
@@ -248,7 +248,7 @@
 							title:'首绑支付宝享满88减10',
 							desc:'每天上午八点起限量抢',
 							type:'立即申请',
-							url:'https://ecentre.spdbccc.com.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
+							url:'https://rongmo.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
 						}
 					],
 					'中信银行':[
@@ -557,7 +557,7 @@
 						id:1,
 						title:'简约白金卡，最高额度50000元！',
 						img:'./src/link/news/news1.png',
-						url:'https://ecentre.spdbccc.com.cn/creditcard/indexActivity.htm?data=ZF2780059&itemcode=0000000187'
+						url:'https://rongmo.zhgroot.cn/creditcard/indexActivity.htm?data=ZF2780059&itemcode=0000000187'
 					},
 					{
 						id:2,
@@ -609,9 +609,6 @@
 					let brr=str.split("=");
 					let keyname=brr.shift();
 					let linkurl=brr.join("=");
-					if(linkurl.indexOf('ecentre.spdbccc.com.cn')>0){
-						return linkurl;
-					}
 					let value=escape(linkurl);
 					return `${realurl}?${keyname}=${value}`
 				}

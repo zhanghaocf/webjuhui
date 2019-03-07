@@ -3,15 +3,16 @@
 	padding:0;
 	-webkit-user-select: none;
 	user-select: none;
+	-webkit-tap-highlight-color: transparent;
 }
 a{
 	text-decoration: none;
-	-webkit-tap-highlight-color: transparent;
 }
 #app{
 	overflow-x: hidden;
 	font-size: 0.32rem;
 	background-color: white;
+	margin-bottom: 0.88rem;
 }
 [v-cloak]{
 	display: none;

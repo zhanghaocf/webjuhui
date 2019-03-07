@@ -3,26 +3,32 @@
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
-		
 		<title>详情页</title>
+		<script src="js/rem.js"></script>
 		<style type="text/css">
 			*{
 				margin:0;padding:0;
 				-webkit-user-select: none;
 				user-select: none;
+				-webkit-tap-highlight-color: transparent;
 			}
-				
+			body{
+				font-size: 0.32rem;
+			}
 			#ifm{
 				box-sizing: border-box;
 				display: block;
 			}
 			.home{
-				width:50px;
-				height:50px;
-				position:fixed;
-				right:20px;
-				bottom:20px;
+				width:0.8rem;
+				height:0.8rem;
+				position:absolute;
+				right:0.2rem;
+				bottom:0.2rem;
 				z-index: 1;
+			}
+			#ifmwrap{
+				position:relative;
 			}
 		  .loader {
 			  position: relative;
@@ -88,6 +94,7 @@
 			html,
 			body {
 			  height: 100%;
+			  background-color: #F7F7F7;
 			}
 			
 			.loader {
@@ -102,10 +109,10 @@
 		<div class="loader" id="loader"></div>
 		<div id="ifmwrap" style="overflow: auto;-webkit-overflow-scrolling:touch">
 			<iframe id="ifm" frameborder="0" height="100%" style="width: 1px; min-width: 100%; *width: 100%;"></iframe>
+			<a href="./index.html">
+				<img class="home" src="./src/home.png"/>
+			</a>
 		</div>
-		<a href="./index.html">
-			<img class="home" src="./src/home.png"/>
-		</a>
 	</body>
 	<script>
 		var loader=document.getElementById("loader");
@@ -117,7 +124,9 @@
 		ifmwrap.style.width=window.screen.availWidth+"px";
 		ifmwrap.style.height=window.screen.availHeight+"px";
 		if (navigator.userAgent.match(/iPad|iPhone/i)) {
-		ifm.setAttribute('scrolling', 'no');
+			ifm.setAttribute('scrolling', 'no');
+			console.log(window.screen.availHeight-88*window.offsetWidth/750)
+			ifmwrap.style.height=(window.screen.availHeight-88*window.screen.width/750)+"px";
 		}
 		ifm.src=unescape(url);
 		ifm.onload=function(){

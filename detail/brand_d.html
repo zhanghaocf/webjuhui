@@ -11,6 +11,7 @@
 				padding:0;
 				-webkit-user-select: none;
 				user-select: none;
+				-webkit-tap-highlight-color: transparent;
 			}
 			html,body{
 				height:100%;
@@ -20,11 +21,11 @@
 			}
 			a{
 				text-decoration: none;
-				-webkit-tap-highlight-color: transparent;
 			}
 			#app{
 				overflow-x: hidden;
 				font-size: 0.32rem;
+				margin-bottom: 0.88rem;
 			}
 			[v-cloak]{
 				display: none;
@@ -86,11 +87,11 @@
 			  white-space: nowrap;
 			}
 			.home{
-				width:50px;
-				height:50px;
+				width:0.8rem;
+				height:0.8rem;
 				position:fixed;
-				right:20px;
-				bottom:20px;
+				right:0.2rem;
+				bottom:0.2rem;
 			}
 		</style>
 	</head>
@@ -108,7 +109,7 @@
 				</a>
 			</div>
 			<a href="../index.html">
-				<img class="home" src="../src/home.png"/>
+				<img id="home" class="home" src="../src/home.png"/>
 			</a>
 		</div>
 	</body>
@@ -132,7 +133,7 @@
 						img:'../src/link/brand/zs.png',
 						title:'8元星巴克抵扣券限时抢兑',
 						name:'招商银行信用卡',
-						url:'https://xyk.cmbchina.com/card/cardList?WT.mc_id=N3700MMA0868634500MR'
+						url:'https://rongmo.zhgroot.cn/zhaoshang/card/cardList?WT.mc_id=N3700MMA0868634500MR'
 					},
 					{
 						id:3,
@@ -153,7 +154,7 @@
 						img:'../src/link/brand/pf.png',
 						title:'17500积分兑换大杯饮品',
 						name:'浦发银行信用卡',
-						url:'https://ecentre.spdbccc.com.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
+						url:'https://rongmo.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
 					}
 				]
 			},
@@ -165,7 +166,7 @@
 						img:'../src/link/brand/pf.png',
 						title:'90元购100元屈臣氏代金券',
 						name:'浦发银行信用卡',
-						url:'https://ecentre.spdbccc.com.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
+						url:'https://rongmo.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
 					},
 					{
 						id:2,
@@ -205,7 +206,7 @@
 						img:'../src/link/brand/pf.png',
 						title:'40元购50元汉堡王代金券',
 						name:'浦发银行信用卡',
-						url:'https://ecentre.spdbccc.com.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
+						url:'https://rongmo.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
 					}
 				]
 			},
@@ -231,7 +232,7 @@
 						img:'../src/link/brand/pf.png',
 						title:'39600积分兑30元代金券',
 						name:'浦发银行信用卡',
-						url:'https://ecentre.spdbccc.com.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
+						url:'https://rongmo.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
 					},
 					{
 						id:4,
@@ -264,7 +265,7 @@
 						img:'../src/link/brand/pf.png',
 						title:'40元购50元哈根达斯代金券',
 						name:'浦发银行信用卡',
-						url:'https://ecentre.spdbccc.com.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
+						url:'https://rongmo.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
 					},
 					{
 						id:4,
@@ -289,13 +290,13 @@
 					let brr=str.split("=");
 					let keyname=brr.shift();
 					let linkurl=brr.join("=");
-					if(linkurl.indexOf('ecentre.spdbccc.com.cn')>0||linkurl.indexOf('xyk.cmbchina.com')>0){
-						return linkurl;
-					}
 					let value=escape(linkurl);
 					return `${realurl}?${keyname}=${value}`
 				}
 			}
 		})
+		if (navigator.userAgent.match(/iPad|iPhone/i)) {
+			document.getElementById('home').style.bottom=(88*window.screen.width/750)+"px";
+		}
 	</script>
 </html>
