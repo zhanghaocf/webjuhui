@@ -22,13 +22,10 @@
 			.home{
 				width:0.8rem;
 				height:0.8rem;
-				position:absolute;
+				position:fixed;
 				right:0.2rem;
 				bottom:0.2rem;
 				z-index: 1;
-			}
-			#ifmwrap{
-				position:relative;
 			}
 		  .loader {
 			  position: relative;
@@ -109,10 +106,10 @@
 		<div class="loader" id="loader"></div>
 		<div id="ifmwrap" style="overflow: auto;-webkit-overflow-scrolling:touch">
 			<iframe id="ifm" frameborder="0" height="100%" style="width: 1px; min-width: 100%; *width: 100%;"></iframe>
-			<a href="./index.html">
-				<img class="home" src="./src/home.png"/>
-			</a>
 		</div>
+		<a href="./index.html">
+			<img class="home" id="home" src="./src/home.png"/>
+		</a>
 	</body>
 	<script>
 		var loader=document.getElementById("loader");
@@ -124,9 +121,11 @@
 		ifmwrap.style.width=window.screen.availWidth+"px";
 		ifmwrap.style.height=window.screen.availHeight+"px";
 		if (navigator.userAgent.match(/iPad|iPhone/i)) {
+			var home=document.getElementById("home");
 			ifm.setAttribute('scrolling', 'no');
-			console.log(window.screen.availHeight-88*window.offsetWidth/750)
-			ifmwrap.style.height=(window.screen.availHeight-88*window.screen.width/750)+"px";
+			var val=100*window.screen.width/750;
+			ifmwrap.style.height=window.screen.availHeight-val+"px";
+			home.style.bottom=val+"px";
 		}
 		ifm.src=unescape(url);
 		ifm.onload=function(){
