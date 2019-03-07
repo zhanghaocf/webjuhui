@@ -13,9 +13,7 @@
 			<div class="swiper-container bannerswiper borderbottomgray">
 				<div class="swiper-wrapper">
 					<div class="swiper-slide" v-for="item in bannerList" :key="item.id">
-						<!-- <a :href="'./detail.html?url='+item.url|handleurl"> -->
-							<img @click="goLink('/detail.html?url='+item.url)"  class="slideimg" :src="item.img" />
-						<!-- </a> -->
+						<img @click="goLink('/detail.html?url='+item.url)"  class="slideimg" :src="item.img" />
 					</div>
 				</div>
 				<!-- 如果需要分页器 -->
@@ -25,7 +23,7 @@
 				<div class="text">品牌活动</div>
 				<div class="onlineswiper">
 					<div class="swiper-wrapper">
-						<div @click="goLink(item.url)" class="swiper-slide onlineslide" v-for="item in onlinelist" :key="item.id">
+						<div @click="goLink(item.url,true)" class="swiper-slide onlineslide" v-for="item in onlinelist" :key="item.id">
 							<img src="src/hot.png" class="hot" v-if="item.ishot" />
 							<img class="onlineimg" :src="item.img">
 							<div v-text="item.text"></div>
@@ -567,7 +565,8 @@
 						url:'https://apply.mcard.boc.cn/apply/rUbMba'
 					}
 				],
-				isIOS:false
+				isIOS:false,
+				isApp:true,
 			},
 			methods:{
 				opnext:function(){
@@ -582,7 +581,21 @@
 					reswiper.updateSlides();
 					reswiper.slideTo(0,0);
 				},
-				goLink(url){
+				goLink(url,bol){
+					if(!this.isApp){
+						if(bol){
+							location.href=url;
+							return;
+						}
+						let arr=url.split('?');
+						arr.shift();
+						let handurl=arr.join("?");
+						let brr=handurl.split("=");
+						brr.shift();
+						url=brr.join("=");
+						location.href=url;
+						return;
+					}
 					if(url[0]==='.'){
 						url=url.slice(1);
 					}
@@ -600,6 +613,7 @@
 			},
 			created(){
 				this.isIOS=!!navigator.userAgent.match(/iPad|iPhone/i);
+				this.isApp=typeof CtclientJS!=='undefined'||typeof backLink!=='undefined';
 			},
 			computed:{
 				compu_recommendObj:function(){

@@ -274,10 +274,21 @@
 			data:brand[type],
 			created(){
 				this.isIOS=!!navigator.userAgent.match(/iPad|iPhone/i);
+				this.isApp=typeof CtclientJS!=='undefined'||typeof backLink!=='undefined';
 				this.domainName='http://dianxin.card.fxm360.com';
 			},
 			methods:{
 				goLink(url){
+					if(!this.isApp){
+						let arr=url.split('?');
+						arr.shift();
+						let handurl=arr.join("?");
+						let brr=handurl.split("=");
+						brr.shift();
+						url=brr.join("=");
+						location.href=url;
+						return;
+					}
 					if(url[0]==='.'){
 						url=url.slice(1);
 					}

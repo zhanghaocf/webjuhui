@@ -19,8 +19,16 @@
 				box-sizing: border-box;
 				display: block;
 			}
-			#ifmwrap{
-				position:relative;
+			#home{
+				display: none;
+			}
+			.home{
+				width:0.8rem;
+				height:0.8rem;
+				position:fixed;
+				right:0.2rem;
+				bottom:0.2rem;
+				z-index: 1;
 			}
 		  .loader {
 			  position: relative;
@@ -102,8 +110,15 @@
 		<div id="ifmwrap" style="overflow: auto;-webkit-overflow-scrolling:touch">
 			<iframe id="ifm" frameborder="0" height="100%" style="width: 1px; min-width: 100%; *width: 100%;"></iframe>
 		</div>
+		<a id="home" href="./index.html">
+			<img class="home" src="./src/home.png"/>
+		</a>
 	</body>
 	<script>
+		var home=document.getElementById('home');
+		if(!(typeof CtclientJS!=='undefined'||typeof backLink!=='undefined')){
+			home.style.display="block";
+		}
 		var loader=document.getElementById("loader");
 		var arr=location.search.split("=");
 		arr.shift();
