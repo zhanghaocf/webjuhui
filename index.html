@@ -13,9 +13,9 @@
 			<div class="swiper-container bannerswiper borderbottomgray">
 				<div class="swiper-wrapper">
 					<div class="swiper-slide" v-for="item in bannerList" :key="item.id">
-						<a :href="'./detail.html?url='+item.url|handleurl">
-							<img class="slideimg" :src="item.img" />
-						</a>
+						<!-- <a :href="'./detail.html?url='+item.url|handleurl"> -->
+							<img @click="goLink('/detail.html?url='+item.url)"  class="slideimg" :src="item.img" />
+						<!-- </a> -->
 					</div>
 				</div>
 				<!-- 如果需要分页器 -->
@@ -25,17 +25,17 @@
 				<div class="text">品牌活动</div>
 				<div class="onlineswiper">
 					<div class="swiper-wrapper">
-						<a :href="item.url" class="swiper-slide onlineslide" v-for="item in onlinelist" :key="item.id">
+						<div @click="goLink(item.url)" class="swiper-slide onlineslide" v-for="item in onlinelist" :key="item.id">
 							<img src="src/hot.png" class="hot" v-if="item.ishot" />
 							<img class="onlineimg" :src="item.img">
 							<div v-text="item.text"></div>
-						</a>
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class='bargain borderbottomgray'>
 				<div class='text'>超值特惠</div>
-				<a v-for="(item , index) in tehui" :class="'top'+(index+1)" :key="item.id" :href="'./detail.html?url='+item.url|handleurl">
+				<div v-for="(item , index) in tehui" :class="'top'+(index+1)" :key="item.id" @click="goLink('/detail.html?url='+item.url)">
 					<img class="bargainimg" :src='item.img' />
 				  	<div class='tag'>No.{{index+1}}</div>
 				  	<div v-if="!!item.title" class="bargaintitle oneline">{{item.title}}</div>
@@ -43,7 +43,7 @@
 					  	<!-- <div class="bbtn">无卡申请</div> -->
 					  	<div class="bname oneline">{{item.name}}</div>
 				  	</div>
-				</a>
+				</div>
 			 </div>
 			 <div class="recommend borderbottomgray">
 			 	<div class='text'>专属推荐</div>
@@ -57,14 +57,14 @@
 				<div class="reswiper swiper-container">
 					<div class="swiper-wrapper">
 						<div class="swiper-slide reslide swiper-no-swiping" v-for="(item,keyn) in compu_recommendObj[activerecom]" :key="keyn">
-							<a :href="'./detail.html?url='+wuitem.url|handleurl" class="wupin" v-for="(wuitem,wuindex) in item" :key="wuitem.id">
+							<div @click="goLink('/detail.html?url='+wuitem.url)" class="wupin" v-for="(wuitem,wuindex) in item" :key="wuitem.id">
 								<img :src="wuitem.img" class="wuimg" />
 								<div class="midwu">
 									<div class="wutitle oneline">{{wuitem.title}}</div>
 									<div class="wudesc oneline">{{wuitem.desc}}</div>
 								</div>
 								<div class="wuopera"><span>{{wuitem.type}}</span></div>
-							</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -79,10 +79,10 @@
 			 </div>
 			<div class="news">
 				<div class='text'>热卡推荐</div>
-				<a class="newlist" v-for="item in newslist" :key="item.id" :href="'./detail.html?url='+item.url|handleurl">
+				<div class="newlist" v-for="item in newslist" :key="item.id" @click="goLink('/detail.html?url='+item.url)">
 					<div class="newstitle">{{item.title}}</div>
 					<img :src="item.img" class="newsimg" />
-				<a>
+				<div>
 			</div>
 		</div>
 	</body>
@@ -122,6 +122,7 @@
 		var vm=new Vue({
 			el:'#app',
 			data:{
+				domainName:'http://dianxin.card.fxm360.com',
 				swipercount:1,//专属推荐页面个数
 				bannerList: [
 					{
@@ -565,7 +566,8 @@
 						img:'./src/link/news/news2.png',
 						url:'https://apply.mcard.boc.cn/apply/rUbMba'
 					}
-				]
+				],
+				isIOS:false
 			},
 			methods:{
 				opnext:function(){
@@ -579,7 +581,25 @@
 					this.activerecom=item;
 					reswiper.updateSlides();
 					reswiper.slideTo(0,0);
+				},
+				goLink(url){
+					if(url[0]==='.'){
+						url=url.slice(1);
+					}
+					url=this.domainName+url;
+					console.log(url);
+					if(this.isIOS){
+						this.goIOSLink('2',url,null,null);
+					}else{
+						CtclientJS.goLink('2',url,null,null);
+					}
+				},
+				goIOSLink(linkType,Link,backlink,title){
+					window.location.href="objc://goLink?linkType="+encodeURIComponent(linkType)+"&Link="+encodeURIComponent(Link)+"&backLink="+encodeURIComponent(backLink) +"&title="+encodeURIComponent(title);
 				}
+			},
+			created(){
+				this.isIOS=!!navigator.userAgent.match(/iPad|iPhone/i);
 			},
 			computed:{
 				compu_recommendObj:function(){

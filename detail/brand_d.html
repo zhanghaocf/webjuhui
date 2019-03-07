@@ -86,31 +86,21 @@
 			  text-overflow: ellipsis;
 			  white-space: nowrap;
 			}
-			.home{
-				width:0.8rem;
-				height:0.8rem;
-				position:fixed;
-				right:0.2rem;
-				bottom:0.2rem;
-			}
 		</style>
 	</head>
 	<body>
 		<div id="app">
 			<img :src="headimg" class="bg" />
 			<div class="wrap">
-				<a :href="'../detail.html?url='+item.url|handleurl" class="list" v-for="item in list" :key="item.id">
+				<div @click="goLink('/detail.html?url='+item.url)" class="list" v-for="item in list" :key="item.id">
 					<img :src="item.img" class="l_img" />
 					<div class="middle">
 						<p class="l_title oneline">{{item.title}}</p>
 						<p class="oneline">{{item.name}}</p>
 					</div>
 					<img src="../src/link/brand/b_right.png" class="l_right" />
-				</a>
+				</div>
 			</div>
-			<a href="../index.html">
-				<img id="home" class="home" src="../src/home.png"/>
-			</a>
 		</div>
 	</body>
 	<script src="../js/vue.min.js"></script>
@@ -282,6 +272,27 @@
 		var vm=new Vue({
 			el:"#app",
 			data:brand[type],
+			created(){
+				this.isIOS=!!navigator.userAgent.match(/iPad|iPhone/i);
+				this.domainName='http://dianxin.card.fxm360.com';
+			},
+			methods:{
+				goLink(url){
+					if(url[0]==='.'){
+						url=url.slice(1);
+					}
+					url=this.domainName+url;
+					console.log(url);
+					if(this.isIOS){
+						this.goIOSLink('2',url,null,null);
+					}else{
+						CtclientJS.goLink('2',url,null,null);
+					}
+				},
+				goIOSLink(linkType,Link,backlink,title){
+					window.location.href="objc://goLink?linkType="+encodeURIComponent(linkType)+"&Link="+encodeURIComponent(Link)+"&backLink="+encodeURIComponent(backLink) +"&title="+encodeURIComponent(title);
+				}
+			},
 			filters:{
 				handleurl(url){
 					let arr=url.split("?");
@@ -295,8 +306,5 @@
 				}
 			}
 		})
-		if (navigator.userAgent.match(/iPad|iPhone/i)) {
-			document.getElementById('home').style.bottom=(88*window.screen.width/750)+"px";
-		}
 	</script>
 </html>
