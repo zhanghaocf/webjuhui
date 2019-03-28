@@ -13,7 +13,11 @@
 			<div class="swiper-container bannerswiper borderbottomgray">
 				<div class="swiper-wrapper">
 					<div class="swiper-slide" v-for="item in bannerList" :key="item.id">
-						<a :href="'./detail.html?url='+item.url|handleurl">
+						<a v-if="!item.url.match(new RegExp(rootname))"  :href="'./detail.html?url='+item.url|handleurl">
+							<img class="slideimg" :src="item.img" />
+							{{item.url|ispufa}}
+						</a>
+						<a v-else :href="item.url|pufa">
 							<img class="slideimg" :src="item.img" />
 						</a>
 					</div>
@@ -35,15 +39,26 @@
 			</div>
 			<div class='bargain borderbottomgray'>
 				<div class='text'>超值特惠</div>
-				<a v-for="(item , index) in tehui" :class="'top'+(index+1)" :key="item.id" :href="'./detail.html?url='+item.url|handleurl">
-					<img class="bargainimg" :src='item.img' />
-				  	<div class='tag'>No.{{index+1}}</div>
-				  	<div v-if="!!item.title" class="bargaintitle oneline">{{item.title}}</div>
-				  	<div v-if="!!item.name">
-					  	<!-- <div class="bbtn">无卡申请</div> -->
-					  	<div class="bname oneline">{{item.name}}</div>
-				  	</div>
-				</a>
+				<div v-for="(item , index) in tehui" :key="item.id">
+					<a  v-if="!item.url.match(new RegExp(rootname))" :class="'top'+(index+1)"  :href="'./detail.html?url='+item.url|handleurl">
+						<img class="bargainimg" :src='item.img' />
+							<div class='tag'>No.{{index+1}}</div>
+							<div v-if="!!item.title" class="bargaintitle oneline">{{item.title}}</div>
+							<div v-if="!!item.name">
+								<!-- <div class="bbtn">无卡申请</div> -->
+								<div class="bname oneline">{{item.name}}</div>
+							</div>
+					</a>
+					<a  v-else :class="'top'+(index+1)" :href="item.url|pufa">
+						<img class="bargainimg" :src='item.img' />
+							<div class='tag'>No.{{index+1}}</div>
+							<div v-if="!!item.title" class="bargaintitle oneline">{{item.title}}</div>
+							<div v-if="!!item.name">
+								<!-- <div class="bbtn">无卡申请</div> -->
+								<div class="bname oneline">{{item.name}}</div>
+							</div>
+					</a>
+				</div>
 			 </div>
 			 <div class="recommend borderbottomgray">
 			 	<div class='text'>专属推荐</div>
@@ -57,14 +72,24 @@
 				<div class="reswiper swiper-container">
 					<div class="swiper-wrapper">
 						<div class="swiper-slide reslide swiper-no-swiping" v-for="(item,keyn) in compu_recommendObj[activerecom]" :key="keyn">
-							<a :href="'./detail.html?url='+wuitem.url|handleurl" class="wupin" v-for="(wuitem,wuindex) in item" :key="wuitem.id">
-								<img :src="wuitem.img" class="wuimg" />
-								<div class="midwu">
-									<div class="wutitle oneline">{{wuitem.title}}</div>
-									<div class="wudesc oneline">{{wuitem.desc}}</div>
-								</div>
-								<div class="wuopera"><span>{{wuitem.type}}</span></div>
-							</a>
+							<div class="wupindiv" v-for="(wuitem,wuindex) in item" :key="wuitem.id">
+								<a  v-if="!wuitem.url.match(new RegExp(rootname))" :href="'./detail.html?url='+wuitem.url|handleurl" class="wupin" >
+									<img :src="wuitem.img" class="wuimg" />
+									<div class="midwu">
+										<div class="wutitle oneline">{{wuitem.title}}</div>
+										<div class="wudesc oneline">{{wuitem.desc}}</div>
+									</div>
+									<div class="wuopera"><span>{{wuitem.type}}</span></div>
+								</a>
+								<a  v-else :href="wuitem.url|pufa" class="wupin" >
+									<img :src="wuitem.img" class="wuimg" />
+									<div class="midwu">
+										<div class="wutitle oneline">{{wuitem.title}}</div>
+										<div class="wudesc oneline">{{wuitem.desc}}</div>
+									</div>
+									<div class="wuopera"><span>{{wuitem.type}}</span></div>
+								</a>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -79,10 +104,16 @@
 			 </div>
 			<div class="news">
 				<div class='text'>热卡推荐</div>
-				<a class="newlist" v-for="item in newslist" :key="item.id" :href="'./detail.html?url='+item.url|handleurl">
-					<div class="newstitle">{{item.title}}</div>
-					<img :src="item.img" class="newsimg" />
-				<a>
+				<div v-for="item in newslist" :key="item.id">
+					<a v-if="!item.url.match(new RegExp(rootname))" class="newlist" :href="'./detail.html?url='+item.url|handleurl">
+						<div class="newstitle">{{item.title}}</div>
+						<img :src="item.img" class="newsimg" />
+					<a>
+					<a v-if="item.url.match(new RegExp(rootname))" class="newlist" :href="item.url|pufa">
+						<div class="newstitle">{{item.title}}</div>
+						<img :src="item.img" class="newsimg" />
+					<a>
+				</div>
 			</div>
 		</div>
 	</body>
@@ -122,12 +153,13 @@
 		var vm=new Vue({
 			el:'#app',
 			data:{
+				rootname:'https://rongmo2.zhgroot.cn',
 				swipercount:1,//专属推荐页面个数
 				bannerList: [
 					{
 						id:1,
 						img:"./src/banner1.png",
-						url:'https://rongmo.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
+						url:'https://rongmo2.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
 					},
 					{
 						id:2,
@@ -208,7 +240,7 @@
 							title:'刷卡金返还&多倍积分',
 							desc:'\"小浦惠花\"指定商户专享',
 							type:'立即申请',
-							url:'https://rongmo.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
+							url:'https://rongmo2.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
 						},
 						{
 							id:2,
@@ -216,7 +248,7 @@
 							title:'境外刷卡享50元酒店好礼',
 							desc:'单笔满200元即可使用',
 							type:'立即申请',
-							url:'https://rongmo.zhgroot.cn/creditcard/indexActivity.htm?data=ZF2780059&itemcode=0000000187'
+							url:'https://rongmo2.zhgroot.cn/creditcard/indexActivity.htm?data=ZF2780059&itemcode=0000000187'
 						},
 						{
 							id:3,
@@ -224,7 +256,7 @@
 							title:'浦发惠军联名卡荣耀上市',
 							desc:'专属福利，月月有礼',
 							type:'立即申请',
-							url:'https://rongmo.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
+							url:'https://rongmo2.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
 						},
 						{
 							id:4,
@@ -232,7 +264,7 @@
 							title:'猪小屁信用卡福气满满',
 							desc:'首刷礼、福袋大放送',
 							type:'立即申请',
-							url:'https://rongmo.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
+							url:'https://rongmo2.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
 						},
 						{
 							id:5,
@@ -240,7 +272,7 @@
 							title:'首绑支付宝享满88减10',
 							desc:'每天上午八点起限量抢',
 							type:'立即申请',
-							url:'https://rongmo.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
+							url:'https://rongmo2.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
 						},
 						{
 							id:6,
@@ -248,7 +280,7 @@
 							title:'首绑支付宝享满88减10',
 							desc:'每天上午八点起限量抢',
 							type:'立即申请',
-							url:'https://rongmo.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
+							url:'https://rongmo2.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
 						}
 					],
 					'中信银行':[
@@ -557,7 +589,7 @@
 						id:1,
 						title:'简约白金卡，最高额度50000元！',
 						img:'./src/link/news/news1.png',
-						url:'https://rongmo.zhgroot.cn/creditcard/indexActivity.htm?data=ZF2780059&itemcode=0000000187'
+						url:'https://rongmo2.zhgroot.cn/creditcard/indexActivity.htm?data=ZF2780059&itemcode=0000000187'
 					},
 					{
 						id:2,
@@ -611,6 +643,10 @@
 					let linkurl=brr.join("=");
 					let value=escape(linkurl);
 					return `${realurl}?${keyname}=${value}`
+				},
+				pufa(url){
+					//TODO:这里也需要把你反向代理的域名换回他之前的域名
+					return url.replace('https://rongmo2.zhgroot.cn','https://ecentre.spdbccc.com.cn')
 				}
 			}
 		})

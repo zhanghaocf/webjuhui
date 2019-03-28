@@ -208,10 +208,14 @@ a{
 	flex-shrink: 0;
 	margin-right: 18px;
 }
-.wupin{
+.wupindiv{
 	height:20%;
 	box-sizing: border-box;
 	border-bottom:1px solid #f5f6f8;
+}
+.wupin{
+	height:100%;
+	box-sizing: border-box;
 	display: flex;
 	display: -webkit-flex;
 	align-items: center;

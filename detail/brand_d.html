@@ -99,14 +99,24 @@
 		<div id="app">
 			<img :src="headimg" class="bg" />
 			<div class="wrap">
-				<a :href="'../detail.html?url='+item.url|handleurl" class="list" v-for="item in list" :key="item.id">
-					<img :src="item.img" class="l_img" />
-					<div class="middle">
-						<p class="l_title oneline">{{item.title}}</p>
-						<p class="oneline">{{item.name}}</p>
-					</div>
-					<img src="../src/link/brand/b_right.png" class="l_right" />
-				</a>
+				<div v-for="item in list" :key="item.id">
+					<a v-if="!item.url.match(new RegExp(rootname))" :href="'../detail.html?url='+item.url|handleurl" class="list">
+						<img :src="item.img" class="l_img" />
+						<div class="middle">
+							<p class="l_title oneline">{{item.title}}</p>
+							<p class="oneline">{{item.name}}</p>
+						</div>
+						<img src="../src/link/brand/b_right.png" class="l_right" />
+					</a>
+					<a v-else :href="item.url|pufa" class="list">
+						<img :src="item.img" class="l_img" />
+						<div class="middle">
+							<p class="l_title oneline">{{item.title}}</p>
+							<p class="oneline">{{item.name}}</p>
+						</div>
+						<img src="../src/link/brand/b_right.png" class="l_right" />
+					</a>
+				</div>
 			</div>
 			<a href="../index.html">
 				<img id="home" class="home" src="../src/home.png"/>
@@ -154,7 +164,7 @@
 						img:'../src/link/brand/pf.png',
 						title:'17500积分兑换大杯饮品',
 						name:'浦发银行信用卡',
-						url:'https://rongmo.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
+						url:'https://rongmo2.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
 					}
 				]
 			},
@@ -166,7 +176,7 @@
 						img:'../src/link/brand/pf.png',
 						title:'90元购100元屈臣氏代金券',
 						name:'浦发银行信用卡',
-						url:'https://rongmo.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
+						url:'https://rongmo2.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
 					},
 					{
 						id:2,
@@ -206,7 +216,7 @@
 						img:'../src/link/brand/pf.png',
 						title:'40元购50元汉堡王代金券',
 						name:'浦发银行信用卡',
-						url:'https://rongmo.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
+						url:'https://rongmo2.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
 					}
 				]
 			},
@@ -232,7 +242,7 @@
 						img:'../src/link/brand/pf.png',
 						title:'39600积分兑30元代金券',
 						name:'浦发银行信用卡',
-						url:'https://rongmo.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
+						url:'https://rongmo2.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
 					},
 					{
 						id:4,
@@ -265,7 +275,7 @@
 						img:'../src/link/brand/pf.png',
 						title:'40元购50元哈根达斯代金券',
 						name:'浦发银行信用卡',
-						url:'https://rongmo.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
+						url:'https://rongmo2.zhgroot.cn/creditcard/indexActivity.htm?data=I2553943&itemcode=rm00000087'
 					},
 					{
 						id:4,
@@ -281,7 +291,10 @@
 	<script>
 		var vm=new Vue({
 			el:"#app",
-			data:brand[type],
+			data:{
+				...brand[type],
+				rootname:'https://rongmo2.zhgroot.cn'
+			},
 			filters:{
 				handleurl(url){
 					let arr=url.split("?");
@@ -292,6 +305,10 @@
 					let linkurl=brr.join("=");
 					let value=escape(linkurl);
 					return `${realurl}?${keyname}=${value}`
+				},
+				pufa(url){
+					//TODO:这里也需要把你反向代理的域名换回他之前的域名
+					return url.replace('https://rongmo2.zhgroot.cn','https://ecentre.spdbccc.com.cn')
 				}
 			}
 		})
